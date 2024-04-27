@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コメント付きサイト</title>
+</head>
+<body>
+<h1>サイトへようこそ</h1>
+
+<div id="comments">
+  <!-- コメントが表示される場所 -->
+</div>
+
+<h2>コメントを追加する</h2>
+<form id="commentForm">
+  <label for="name">名前:</label><br>
+  <input type="text" id="name" name="name" required><br>
+  <label for="comment">コメント:</label><br>
+  <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+  <button type="submit">コメントを投稿</button>
+</form>
+
+<script>
+document.getElementById("commentForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // ページの再読み込みを防止する
+
+  // フォームから名前とコメントを取得
+  var name = document.getElementById("name").value;
+  var comment = document.getElementById("comment").value;
+
+  // コメントを表示するdiv要素を取得
+  var commentsDiv = document.getElementById("comments");
+
+  // 新しいコメントを作成
+  var newComment = document.createElement("div");
+  newComment.innerHTML = "<strong>" + name + ":</strong> " + comment;
+
+  // コメントを追加
+  commentsDiv.appendChild(newComment);
+
+  // フォームをリセット
+  document.getElementById("commentForm").reset();
+});
+</script>
+</body>
+</html>
