@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment Storage</title>
+    <title>Shared Comment Storage</title>
 </head>
 <body>
-    <h1>Comment Storage</h1>
+    <h1>Shared Comment Storage</h1>
     <form id="commentForm">
         <div>
             <label for="name">Name:</label>
@@ -25,17 +25,8 @@
     <ul id="commentList"></ul>
 
     <script>
-        // 保存されたコメントを取得して表示する関数
-        function displayComments() {
-            var savedComments = JSON.parse(localStorage.getItem("comments")) || [];
-            var commentList = document.getElementById("commentList");
-
-            savedComments.forEach(function(comment) {
-                var listItem = document.createElement("li");
-                listItem.textContent = comment.name + ": " + comment.comment + " (" + comment.timestamp + ")";
-                commentList.appendChild(listItem);
-            });
-        }
+        // ページ読み込み時に保存されたコメントを表示する
+        displayComments();
 
         // コメントを保存する関数
         function saveComment() {
@@ -46,7 +37,18 @@
                 return;
             }
 
-            var savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+            // 保存されたコメントを読み取る
+            var savedComments = JSON.parse(localStorage.getItem("sharedComments")) || [];
+
+            // すでに同じ内容のコメントがあるかを確認
+            var existingComment = savedComments.find(function(savedComment) {
+                return savedComment.name === name && savedComment.comment === comment;
+            });
+
+            if (existingComment) {
+                alert("This comment has already been saved.");
+                return;
+            }
 
             // 新しいコメントオブジェクトを作成
             var newComment = {
@@ -57,7 +59,7 @@
 
             // 新しいコメントを保存してローカルストレージに更新
             savedComments.push(newComment);
-            localStorage.setItem("comments", JSON.stringify(savedComments));
+            localStorage.setItem("sharedComments", JSON.stringify(savedComments));
 
             alert("Comment saved successfully.");
             // コメントフォームをクリアする
@@ -67,8 +69,20 @@
             displayComments();
         }
 
-        // ページ読み込み時に保存されたコメントを表示する
-        displayComments();
+        // ローカルストレージから保存されたコメントを取得して表示する関数
+        function displayComments() {
+            var savedComments = JSON.parse(localStorage.getItem("sharedComments")) || [];
+            var commentList = document.getElementById("commentList");
+
+            // コメントリストをクリアする
+            commentList.innerHTML = "";
+
+            savedComments.forEach(function(comment) {
+                var listItem = document.createElement("li");
+                listItem.textContent = comment.name + ": " + comment.comment + " (" + comment.timestamp + ")";
+                commentList.appendChild(listItem);
+            });
+        }
     </script>
 </body>
 </html>
