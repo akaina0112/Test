@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Counter</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>共有のダウンロード数</title>
 </head>
 <body>
-    <h1>Download Counter</h1>
-    <p>Total Downloads: <span id="downloadCount">Loading...</span></p>
+<h1>共有のダウンロード数</h1>
+<p>ダウンロード数: <span id="downloadCount">0</span></p>
+<button id="downloadButton">ダウンロード</button>
 
-    <script>
-        // ダウンロード数を取得するためのJavaScript
-        fetch('/downloads')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('downloadCount').textContent = data.downloads;
-            })
-            .catch(error => console.error('Error fetching download count:', error));
-    </script>
+<script>
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // サーバーにダウンロードのカウントを送信
+    fetch('/api/downloads', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ increment: true })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // ダウンロード数を更新して表示
+        document.getElementById('downloadCount').textContent = data.downloads;
+    })
+    .catch(error => console.error('Error fetching download count:', error));
+});
+</script>
 </body>
-  <script src="script.js"></script>
 </html>
