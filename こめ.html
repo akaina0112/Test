@@ -3,34 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コメント</title>
+    <title>Comment Storage</title>
 </head>
 <body>
-    <div id="comments"></div>
-    <textarea id="commentInput" placeholder="コメントを入力してください"></textarea>
-    <button onclick="addComment()">コメントを投稿</button>
+    <h1>Comment Storage</h1>
+    <form id="commentForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" required></textarea>
+        </div>
+        <div>
+            <button type="button" onclick="saveComment()">Save Comment</button>
+        </div>
+    </form>
+
+    <h2>Stored Comments</h2>
+    <ul id="commentList"></ul>
 
     <script>
-        // コメントを格納する配列
-        let comments = [];
+        // 保存されたコメントを取得して表示する関数
+        function displayComments() {
+            var savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+            var commentList = document.getElementById("commentList");
 
-        // コメントを追加する関数
-        function addComment() {
-            const commentInput = document.getElementById("commentInput").value;
-            comments.push(commentInput);
-            renderComments();
-        }
-
-        // コメントを表示する関数
-        function renderComments() {
-            const commentsDiv = document.getElementById("comments");
-            commentsDiv.innerHTML = "";
-            comments.forEach(comment => {
-                const commentElement = document.createElement("p");
-                commentElement.textContent = comment;
-                commentsDiv.appendChild(commentElement);
+            savedComments.forEach(function(comment) {
+                var listItem = document.createElement("li");
+                listItem.textContent = comment.name + ": " + comment.comment + " (" + comment.timestamp + ")";
+                commentList.appendChild(listItem);
             });
         }
+
+        // コメントを保存する関数
+        function saveComment() {
+            var name = document.getElementById("name").value;
+            var comment = document.getElementById("comment").value;
+            if (name.trim() === "" || comment.trim() === "") {
+                alert("Please enter both name and comment.");
+                return;
+            }
+
+            var savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+
+            // 新しいコメントオブジェクトを作成
+            var newComment = {
+                name: name,
+                comment: comment,
+                timestamp: new Date().toISOString() // コメントの日時をISO文字列で保存
+            };
+
+            // 新しいコメントを保存してローカルストレージに更新
+            savedComments.push(newComment);
+            localStorage.setItem("comments", JSON.stringify(savedComments));
+
+            alert("Comment saved successfully.");
+            // コメントフォームをクリアする
+            document.getElementById("commentForm").reset();
+
+            // 保存されたコメントを表示する
+            displayComments();
+        }
+
+        // ページ読み込み時に保存されたコメントを表示する
+        displayComments();
     </script>
 </body>
 </html>
