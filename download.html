@@ -3,30 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>共有のダウンロード数</title>
+<title>GitHubリポジトリのダウンロード数</title>
 </head>
 <body>
-<h1>共有のダウンロード数</h1>
-<p>ダウンロード数: <span id="downloadCount">0</span></p>
-<button id="downloadButton">ダウンロード</button>
+<h1>GitHubリポジトリのダウンロード数</h1>
+<p id="downloadCount">ダウンロード数: <span id="count">...</span></p>
 
 <script>
-document.getElementById('downloadButton').addEventListener('click', function() {
-    // サーバーにダウンロードのカウントを送信
-    fetch('/api/downloads', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ increment: true })
-    })
+// リポジトリの所有者とリポジトリ名
+const owner = 'owner';
+const repo = 'repository';
+
+// リポジトリのリリース情報を取得するAPIエンドポイント
+const releasesUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
+
+// リリース情報を取得し、ダウンロード数を合計する
+fetch(releasesUrl)
     .then(response => response.json())
-    .then(data => {
-        // ダウンロード数を更新して表示
-        document.getElementById('downloadCount').textContent = data.downloads;
+    .then(releases => {
+        // 各リリースのダウンロード数を合計する
+        let totalDownloads = 0;
+        releases.forEach(release => {
+            totalDownloads += release.assets.reduce((sum, asset) => sum + asset.download_count, 0);
+        });
+        // HTMLにダウンロード数を表示
+        document.getElementById('count').textContent = totalDownloads;
     })
-    .catch(error => console.error('Error fetching download count:', error));
-});
+    .catch(error => console.error('Error fetching release information:', error));
 </script>
 </body>
 </html>
