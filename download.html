@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shared Click Counter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Counter</title>
 </head>
 <body>
+    <h1>Download Counter</h1>
+    <p>Total Downloads: <span id="downloadCount">Loading...</span></p>
 
-<button id="clickButton">Click me!</button>
-<p>Shared click count: <span id="sharedClickCount">0</span></p>
-
-<script src="script.js"></script>
+    <script>
+        // ダウンロード数を取得するためのJavaScript
+        fetch('/downloads')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('downloadCount').textContent = data.downloads;
+            })
+            .catch(error => console.error('Error fetching download count:', error));
+    </script>
 </body>
+  <script src="script.js"></script>
 </html>
