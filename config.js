@@ -1,8 +1,8 @@
 // config.js
 
 const config = {
-    owner: 'owner_name', // GitHubリポジトリの所有者名
-    repo: 'repository_name' // GitHubリポジトリの名前
+    owner: 'akaina0112', // GitHubリポジトリの所有者名
+    repo: 'Test' // GitHubリポジトリの名前
 };
 
 export default config;
