@@ -4,57 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Releases</title>
-        <style>
-        /* ダウンロードボタンに適用されるスタイル */
-        .download-button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease; /* ホバー時のトランジション */
-        }
-
-        /* ボタンがホバーされたときのスタイル */
-        .download-button:hover {
-            transform: scale(1.1); /* ボタンの拡大 */
-        }
-    </style>
+    <style>.download-button { padding: 10px 20px; background-color: #007bff; color: #fff; border: none; cursor: pointer; transition: all 0.3s ease; } .download-button:hover { transform: scale(1.1); }</style>
 </head>
 <body>
-    <div id="download-count"></div>
+    <div id="release-info"></div>
 
     <script>
-// main.js
+        // main.js
 
-import config from './config.js';
+        import config from './config.js';
 
-function fetchReleaseInfo() {
-    fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/releases`)
-        .then(response => response.json())
-        .then(data => {
-            let releaseInfoHTML = '';
-            data.forEach(release => {
-                releaseInfoHTML += `<h2>${release.name}</h2>`;
-                release.assets.forEach(asset => {
-                    releaseInfoHTML += `
-                        <p>${asset.name}: ${asset.download_count} downloads</p>
-                        <button onclick="downloadAsset('${asset.browser_download_url}')">Download</button>
-                    `;
+        function fetchReleaseInfo() {
+            fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/releases`)
+                .then(response => response.json())
+                .then(data => {
+                    let releaseInfoHTML = '';
+                    data.forEach(release => {
+                        releaseInfoHTML += `<h2>${release.name}</h2>`;
+                        release.assets.forEach(asset => {
+                            releaseInfoHTML += `<p>${asset.name}: ${asset.download_count} downloads</p><button class="download-button" onclick="downloadAsset('${asset.browser_download_url}')">Download</button>`;
+                        });
+                    });
+                    document.getElementById('release-info').innerHTML = releaseInfoHTML;
+                })
+                .catch(error => {
+                    console.error('Error fetching release info:', error);
                 });
-            });
-            document.getElementById('release-info').innerHTML = releaseInfoHTML;
-        })
-        .catch(error => {
-            console.error('Error fetching release info:', error);
-        });
-}
+        }
 
-// 初期読み込み時にリリース情報を取得
-fetchReleaseInfo();
+        // 初期読み込み時にリリース情報を取得
+        fetchReleaseInfo();
 
-// 30秒ごとにリリース情報を更新
-setInterval(fetchReleaseInfo, 30000);
+        // 30秒ごとにリリース情報を更新
+        setInterval(fetchReleaseInfo, 30000);
     </script>
 </body>
 </html>
