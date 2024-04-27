@@ -9,29 +9,36 @@
     <div id="download-count"></div>
 
     <script>
-          const owner = 'akaina0112'; // GitHubリポジトリの所有者名
-        const repo = 'Test'; // GitHubリポジトリの名前
+// main.js
 
-        function fetchDownloadCount() {
-            fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
-                .then(response => response.json())
-                .then(data => {
-                    let totalDownloadCount = 0;
-                    data.forEach(release => {
-                        totalDownloadCount += release.assets.reduce((acc, asset) => acc + asset.download_count, 0);
-                    });
-                    document.getElementById('download-count').innerText = `Total Downloads: ${totalDownloadCount}`;
-                })
-                .catch(error => {
-                    console.error('Error fetching download count:', error);
+import config from './config.js';
+
+function fetchReleaseInfo() {
+    fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/releases`)
+        .then(response => response.json())
+        .then(data => {
+            let releaseInfoHTML = '';
+            data.forEach(release => {
+                releaseInfoHTML += `<h2>${release.name}</h2>`;
+                release.assets.forEach(asset => {
+                    releaseInfoHTML += `
+                        <p>${asset.name}: ${asset.download_count} downloads</p>
+                        <button onclick="downloadAsset('${asset.browser_download_url}')">Download</button>
+                    `;
                 });
-        }
+            });
+            document.getElementById('release-info').innerHTML = releaseInfoHTML;
+        })
+        .catch(error => {
+            console.error('Error fetching release info:', error);
+        });
+}
 
-        // 初期読み込み時にダウンロード数を取得
-        fetchDownloadCount();
+// 初期読み込み時にリリース情報を取得
+fetchReleaseInfo();
 
-        // 30秒ごとにダウンロード数を更新
-        setInterval(fetchDownloadCount, 30000);
+// 30秒ごとにリリース情報を更新
+setInterval(fetchReleaseInfo, 30000);
     </script>
 </body>
 </html>
