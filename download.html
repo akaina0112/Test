@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GitHubリポジトリのダウンロード情報</title>
+<title>GitHub Releases Download Count</title>
 </head>
 <body>
-<h1>GitHubリポジトリのダウンロード情報</h1>
+<h1>GitHub Releases Download Count</h1>
 
 <div id="downloadInfo">
   <!-- ダウンロード情報がここに挿入されます -->
 </div>
 
 <script>
-// リポジトリの所有者とリポジトリ名
-const owner = 'akaina0112';
-const repo = 'Test';
+// GitHubリポジトリの所有者とリポジトリ名
+const owner = 'owner';
+const repo = 'repository';
 
-// リポジトリのリリース情報を取得するAPIエンドポイント
-const releasesUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
+// GitHubのAPIエンドポイント
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
 
-// リリース情報を取得し、ダウンロードボタンとダウンロード数をHTMLに書き込む
-fetch(releasesUrl)
+// GitHubのAPIを呼び出してリリース情報を取得し、ダウンロード数をHTMLに書き込む
+fetch(apiUrl)
     .then(response => response.json())
     .then(releases => {
-        // ダウンロード情報のHTMLを生成
         let downloadInfoHTML = '';
         releases.forEach(release => {
             let totalDownloads = 0;
@@ -32,13 +31,9 @@ fetch(releasesUrl)
                 totalDownloads += asset.download_count;
             });
             const downloadButtonHTML = `<a href="${release.html_url}" download>Download ${release.name || 'Release'}</a>`;
-            const releaseInfoHTML = `<div>
-                                        ${downloadButtonHTML}
-                                        <span>ダウンロード数: ${totalDownloads.toLocaleString()}</span>
-                                    </div>`;
-            downloadInfoHTML += releaseInfoHTML;
+            const downloadCountHTML = `<span>ダウンロード数: ${totalDownloads.toLocaleString()}</span>`;
+            downloadInfoHTML += `<div>${downloadButtonHTML} ${downloadCountHTML}</div>`;
         });
-        // HTMLにダウンロード情報を書き込む
         document.getElementById('downloadInfo').innerHTML = downloadInfoHTML;
     })
     .catch(error => console.error('Error fetching release information:', error));
