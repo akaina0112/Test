@@ -40,16 +40,6 @@
             // 保存されたコメントを読み取る
             var savedComments = JSON.parse(localStorage.getItem("sharedComments")) || [];
 
-            // すでに同じ内容のコメントがあるかを確認
-            var existingComment = savedComments.find(function(savedComment) {
-                return savedComment.name === name && savedComment.comment === comment;
-            });
-
-            if (existingComment) {
-                alert("This comment has already been saved.");
-                return;
-            }
-
             // 新しいコメントオブジェクトを作成
             var newComment = {
                 name: name,
