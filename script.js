@@ -1,31 +1,18 @@
 // JavaScript code in script.js file
+const express = require('express');
+const app = express();
 
-// ローカルストレージから共有クリック数を読み込む
-let sharedClickCount = localStorage.getItem("sharedClickCount") || 0;
+let downloadCount = 0;
 
-// 共有クリック数を表示する関数
-function displaySharedClickCount() {
-  // 共有クリック数を表示する要素を取得
-  const sharedClickCountElement = document.getElementById("sharedClickCount");
-  // 共有クリック数を表示
-  sharedClickCountElement.textContent = sharedClickCount;
-}
+app.get('/download', (req, res) => {
+    // Increment download count
+    downloadCount++;
+    res.download('path_to_file'); // ファイルの実際のパスを指定する必要があります
+});
 
-// クリックされたら、共有クリック数を増やして表示する関数
-function incrementSharedClickCount() {
-  // 共有クリック数を1増やす
-  sharedClickCount++;
-  // ローカルストレージに新しい共有クリック数を保存
-  localStorage.setItem("sharedClickCount", sharedClickCount);
-  // 共有クリック数を表示する関数を呼び出す
-  displaySharedClickCount();
-}
+app.get('/downloads', (req, res) => {
+    res.json({ downloads: downloadCount });
+});
 
-// クリックされたボタン要素を取得
-const clickButton = document.getElementById("clickButton");
+app.listen(3000, () => console.log('Server is running on port 3000'));
 
-// ボタンがクリックされたら、共有クリック数を増やす関数を呼び出す
-clickButton.addEventListener("click", incrementSharedClickCount);
-
-// ページ読み込み時に共有クリック数を表示する
-displaySharedClickCount();
