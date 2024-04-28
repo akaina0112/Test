@@ -1,48 +1,15 @@
 const owner = 'akaina0112'; // GitHubリポジトリの所有者名
 const repo = 'Test'; // GitHubリポジトリの名前
-
-const fileName1 = '20230704_185437.jpg'; // ファイル1の名前
-const fileName2 = 'example.zip'; // ファイル2の名前
-const fileName3 = 'sample.txt'; // ファイル3の名前
-const fileName4 = 'document.pdf'; // ファイル4の名前
-const fileName5 = 'data.csv'; // ファイル5の名前
-
-const set= '  DL'; //名前
-
-
-//プログラム保存
+const fileNames = ['20230704_185437.jpg', 'example.zip', 'sample.txt', 'document.pdf', 'data.csv']; // ファイル名の配列
+const set = ' DL'; // 名前
 
 function fetchReleaseInfo() {
-    fetchFileData(fileName1)
-        .then(file1Data => {
-            fetchFileData(fileName2)
-                .then(file2Data => {
-                    fetchFileData(fileName3)
-                        .then(file3Data => {
-                            fetchFileData(fileName4)
-                                .then(file4Data => {
-                                    fetchFileData(fileName5)
-                                        .then(file5Data => {
-                                            displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Data);
-                                        })
-                                        .catch(error => {
-                                            console.error('Error fetching file5 info:', error);
-                                        });
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching file4 info:', error);
-                                });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching file3 info:', error);
-                        });
-                })
-                .catch(error => {
-                    console.error('Error fetching file2 info:', error);
-                });
+    Promise.all(fileNames.map(fileName => fetchFileData(fileName)))
+        .then(fileDataArray => {
+            displayReleaseInfo(fileDataArray);
         })
         .catch(error => {
-            console.error('Error fetching file1 info:', error);
+            console.error('Error fetching file info:', error);
         });
 }
 
@@ -62,6 +29,7 @@ function fetchFileData(fileName) {
                     });
                 });
                 const fileData = {
+                    fileName: fileName,
                     downloadCount: downloadCount,
                     downloadUrl: downloadUrl
                 };
@@ -73,51 +41,17 @@ function fetchFileData(fileName) {
     });
 }
 
-function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Data) {
-    const releaseInfoHTML1 = `
-        <div class="release-info">
-            <div class="download-info">
-                <button class="download-button" onclick="downloadAsset('${file1Data.downloadUrl}')">Download</button>
-                <p>: ${file1Data.downloadCount}${set}</p>
-            </div>
-        </div>`;
-    document.getElementById('release-info1').innerHTML = releaseInfoHTML1;
-
-    const releaseInfoHTML2 = `
-        <div class="release-info">
-            <div class="download-info">
-                <button class="download-button" onclick="downloadAsset('${file2Data.downloadUrl}')">Download</button>
-                <p>: ${file2Data.downloadCount}${set}</p>
-            </div>
-        </div>`;
-    document.getElementById('release-info2').innerHTML = releaseInfoHTML2;
-
-    const releaseInfoHTML3 = `
-        <div class="release-info">
-            <div class="download-info">
-                <button class="download-button" onclick="downloadAsset('${file3Data.downloadUrl}')">Download</button>
-                <p>: ${file3Data.downloadCount}${set}</p>
-            </div>
-        </div>`;
-    document.getElementById('release-info3').innerHTML = releaseInfoHTML3;
-
-    const releaseInfoHTML4 = `
-        <div class="release-info">
-            <div class="download-info">
-                <button class="download-button" onclick="downloadAsset('${file4Data.downloadUrl}')">Download</button>
-                <p>: ${file4Data.downloadCount}${set}</p>
-            </div>
-        </div>`;
-    document.getElementById('release-info4').innerHTML = releaseInfoHTML4;
-
-    const releaseInfoHTML5 = `
-        <div class="release-info">
-            <div class="download-info">
-                <button class="download-button" onclick="downloadAsset('${file5Data.downloadUrl}')">Download</button>
-                <p>: ${file5Data.downloadCount}${set}</p>
-            </div>
-        </div>`;
-    document.getElementById('release-info5').innerHTML = releaseInfoHTML5;
+function displayReleaseInfo(fileDataArray) {
+    fileDataArray.forEach((fileData, index) => {
+        const releaseInfoHTML = `
+            <div class="release-info">
+                <div class="download-info">
+                    <button class="download-button" onclick="downloadAsset('${fileData.downloadUrl}')">Download</button>
+                    <p>: ${fileData.downloadCount}${set}</p>
+                </div>
+            </div>`;
+        document.getElementById(`release-info${index + 1}`).innerHTML = releaseInfoHTML;
+    });
 }
 
 function downloadAsset(url) {
@@ -128,4 +62,4 @@ function downloadAsset(url) {
 fetchReleaseInfo();
 
 // 30秒ごとにリリース情報を更新
-setInterval(fetchReleaseInfo, 300000); // 30秒ごとに更新
+setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
