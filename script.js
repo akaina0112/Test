@@ -1,24 +1,32 @@
 const owner = 'akaina0112'; // GitHubリポジトリの所有者名
 const repo = 'Test'; // GitHubリポジトリの名前
 
-
 const fileName1 = '20230704_185437.jpg'; // ファイル1の名前
 const fileName2 = 'example.zip'; // ファイル2の名前
-
+const fileName3 = 'sample.txt'; // ファイル3の名前
+const fileName4 = 'document.pdf'; // ファイル4の名前
+const fileName5 = 'data.csv'; // ファイル5の名前
 
 function fetchReleaseInfo() {
-
-    // ファイル1の情報を取得
     fetchFileData(fileName1)
         .then(file1Data => {
-            // ファイル2の情報を取得
             fetchFileData(fileName2)
                 .then(file2Data => {
-                    // ファイル3の情報を取得
                     fetchFileData(fileName3)
                         .then(file3Data => {
-                            // リリース情報を表示
-                            displayReleaseInfo(file1Data, file2Data, file3Data);
+                            fetchFileData(fileName4)
+                                .then(file4Data => {
+                                    fetchFileData(fileName5)
+                                        .then(file5Data => {
+                                            displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Data);
+                                        })
+                                        .catch(error => {
+                                            console.error('Error fetching file5 info:', error);
+                                        });
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching file4 info:', error);
+                                });
                         })
                         .catch(error => {
                             console.error('Error fetching file3 info:', error);
@@ -60,7 +68,7 @@ function fetchFileData(fileName) {
     });
 }
 
-function displayReleaseInfo(file1Data, file2Data, file3Data) {
+function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Data) {
     const releaseInfoHTML1 = `
         <div class="release-info">
             <div class="download-info">
@@ -87,6 +95,24 @@ function displayReleaseInfo(file1Data, file2Data, file3Data) {
             </div>
         </div>`;
     document.getElementById('release-info3').innerHTML = releaseInfoHTML3;
+
+    const releaseInfoHTML4 = `
+        <div class="release-info">
+            <div class="download-info">
+                <button class="download-button" onclick="downloadAsset('${file4Data.downloadUrl}')">Download</button>
+                <p>ダウンロード数: ${file4Data.downloadCount}</p>
+            </div>
+        </div>`;
+    document.getElementById('release-info4').innerHTML = releaseInfoHTML4;
+
+    const releaseInfoHTML5 = `
+        <div class="release-info">
+            <div class="download-info">
+                <button class="download-button" onclick="downloadAsset('${file5Data.downloadUrl}')">Download</button>
+                <p>ダウンロード数: ${file5Data.downloadCount}</p>
+            </div>
+        </div>`;
+    document.getElementById('release-info5').innerHTML = releaseInfoHTML5;
 }
 
 function downloadAsset(url) {
@@ -95,3 +121,6 @@ function downloadAsset(url) {
 
 // 初期読み込み時にリリース情報を取得
 fetchReleaseInfo();
+
+// 30秒ごとにリリース情報を更新
+setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
