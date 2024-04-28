@@ -1,53 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Releases</title>
-    <style>
-        .release-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .download-info {
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .download-button {
-            margin-left: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>クリック数のリアルタイム更新</title>
 </head>
 <body>
-    <div id="release-info1"></div>
-    <div id="release-info2"></div>
-    <div id="release-info3"></div>
-    <div id="release-info4"></div>
-    <div id="release-info5"></div>
 
-    <script type="module" src="functions.js"></script>
-    <script type="module">
-        import { fetchReleaseInfo, downloadAsset } from './functions.js';
+<button id="clickButton">クリックする</button>
+<p>クリック数: <span id="clickCount">0</span></p>
 
-        fetchReleaseInfo()
-            .then(fileDataArray => {
-                fileDataArray.forEach((fileData, index) => {
-                    const releaseInfoHTML = `
-                        <div class="release-info">
-                            <div class="download-info">
-                                <button class="download-button" onclick="downloadAsset('${fileData.downloadUrl}')">Download</button>
-                                <p>: ${fileData.downloadCount}${set}</p>
-                            </div>
-                        </div>`;
-                    document.getElementById(`release-info${index + 1}`).innerHTML = releaseInfoHTML;
-                });
-            });
+<script>
+// 初期クリック数をローカルストレージから取得
+var clickCount = localStorage.getItem('clickCount') || 0;
+// クリック数を表示する要素を取得
+var clickCountElement = document.getElementById('clickCount');
+// クリック数を表示する
+clickCountElement.textContent = clickCount;
 
-        // 30秒ごとにリリース情報を更新
-        setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
-    </script>
+// ボタン要素を取得
+var button = document.getElementById('clickButton');
+
+// ボタンがクリックされたときの処理
+button.onclick = function() {
+    // クリック数をインクリメント
+    clickCount++;
+    // クリック数を表示する要素に反映
+    clickCountElement.textContent = clickCount;
+    // クリック数をローカルストレージに保存
+    localStorage.setItem('clickCount', clickCount);
+};
+</script>
+
 </body>
 </html>
