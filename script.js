@@ -7,14 +7,22 @@ const fileName2 = 'example.zip'; // ファイル2の名前
 
 
 function fetchReleaseInfo() {
+
     // ファイル1の情報を取得
     fetchFileData(fileName1)
         .then(file1Data => {
             // ファイル2の情報を取得
             fetchFileData(fileName2)
                 .then(file2Data => {
-                    // リリース情報を表示
-                    displayReleaseInfo(file1Data, file2Data);
+                    // ファイル3の情報を取得
+                    fetchFileData(fileName3)
+                        .then(file3Data => {
+                            // リリース情報を表示
+                            displayReleaseInfo(file1Data, file2Data, file3Data);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching file3 info:', error);
+                        });
                 })
                 .catch(error => {
                     console.error('Error fetching file2 info:', error);
@@ -52,12 +60,12 @@ function fetchFileData(fileName) {
     });
 }
 
-function displayReleaseInfo(file1Data, file2Data) {
+function displayReleaseInfo(file1Data, file2Data, file3Data) {
     const releaseInfoHTML1 = `
         <div class="release-info">
             <div class="download-info">
-                <p>ダウンロード数: ${file1Data.downloadCount}</p>
                 <button class="download-button" onclick="downloadAsset('${file1Data.downloadUrl}')">Download</button>
+                <p>ダウンロード数: ${file1Data.downloadCount}</p>
             </div>
         </div>`;
     document.getElementById('release-info1').innerHTML = releaseInfoHTML1;
@@ -65,11 +73,20 @@ function displayReleaseInfo(file1Data, file2Data) {
     const releaseInfoHTML2 = `
         <div class="release-info">
             <div class="download-info">
-                <p>ダウンロード数: ${file2Data.downloadCount}</p>
                 <button class="download-button" onclick="downloadAsset('${file2Data.downloadUrl}')">Download</button>
+                <p>ダウンロード数: ${file2Data.downloadCount}</p>
             </div>
         </div>`;
     document.getElementById('release-info2').innerHTML = releaseInfoHTML2;
+
+    const releaseInfoHTML3 = `
+        <div class="release-info">
+            <div class="download-info">
+                <button class="download-button" onclick="downloadAsset('${file3Data.downloadUrl}')">Download</button>
+                <p>ダウンロード数: ${file3Data.downloadCount}</p>
+            </div>
+        </div>`;
+    document.getElementById('release-info3').innerHTML = releaseInfoHTML3;
 }
 
 function downloadAsset(url) {
