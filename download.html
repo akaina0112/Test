@@ -6,25 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Releases</title>
     <style>
-        .release-info {
-            display: flex;
-            align-items: center;
+        .title-animation {
+            animation: titleBounce 0.5s ease infinite alternate; /* アニメーションを適用 */
         }
 
-        .download-info {
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-        }
+        @keyframes titleBounce {
+            0% {
+                transform: translateY(0); /* アニメーションの最初の位置 */
+            }
 
-        .download-button {
-            margin-left: 10px;
+            100% {
+                transform: translateY(-5px); /* アニメーションの最後の位置 */
+            }
         }
 
         .cat-animation {
             height: 50px; /* サイズを調整 */
             width: 50px; /* サイズを調整 */
-            margin-left: 10px; /* 適切な余白を設定 */
             animation: catJump 0.5s ease-in-out infinite; /* アニメーションを適用 */
         }
 
@@ -42,29 +40,21 @@
 </head>
 
 <body>
-    <div id="release-info1" class="release-info">
-        <!-- 1番目のrelease-infoに猫のアニメーションを追加 -->
+    <h1 class="title-animation">
         <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </h1>
+    <div id="release-info1" class="release-info">
     </div>
     <div id="release-info2" class="release-info">
-        <!-- 2番目のrelease-infoに猫のアニメーションを追加 -->
-        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
     </div>
     <div id="release-info3" class="release-info">
-        <!-- 3番目のrelease-infoに猫のアニメーションを追加 -->
-        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
     </div>
     <div id="release-info4" class="release-info">
-        <!-- 4番目のrelease-infoに猫のアニメーションを追加 -->
-        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
     </div>
     <div id="release-info5" class="release-info">
-        <!-- 5番目のrelease-infoに猫のアニメーションを追加 -->
-        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
     </div>
 
     <script src="script.js"></script>
 </body>
 
 </html>
-
