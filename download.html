@@ -22,39 +22,68 @@
     </style>
 </head>
 <body>
-    <div id="release-info"></div>
+    <a>test</a>
+    <div id="release-info1"></div>
+    <a>test2</a>
+    <div id="release-info2"></div>
+    <a>test3</a>
+    <div id="release-info3"></div>
 
+    <script src="githubConfig.js"></script>
+    <script src="fileConfig.js"></script>
     <script>
         function fetchReleaseInfo() {
-            const owner = 'akaina0112'; // GitHubリポジトリの所有者名
-            const repo = 'Test'; // GitHubリポジトリの名前
-            const fileName = '20230704_185437.jpg'; // ダウンロード数を取得したいファイル名
+            const { owner, repo } = githubConfig;
+            const { files } = fileConfig;
 
-            fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
-                .then(response => response.json())
-                .then(data => {
-                    let downloadCount = 0;
-                    let downloadUrl = '';
-                    data.forEach(release => {
-                        release.assets.forEach(asset => {
-                            if (asset.name === fileName) {
-                                downloadCount += asset.download_count;
-                                downloadUrl = asset.browser_download_url;
-                            }
-                        });
+            files.forEach((fileName, index) => {
+                fetchFileData(fileName, owner, repo)
+                    .then(fileData => {
+                        displayReleaseInfo(fileData, index + 1);
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching file${index + 1} info:`, error);
                     });
-                    const releaseInfoHTML = `
-                        <div class="release-info">
-                            <div class="download-info">
-                                <button class="download-button" onclick="downloadAsset('${downloadUrl}')">Download</button>
-                                <p>: ${downloadCount}DL</p>
-                            </div>
-                        </div>`;
-                    document.getElementById('release-info').innerHTML = releaseInfoHTML;
-                })
-                .catch(error => {
-                    console.error('Error fetching release info:', error);
-                });
+            });
+        }
+
+        function fetchFileData(fileName, owner, repo) {
+            return new Promise((resolve, reject) => {
+                fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let downloadCount = 0;
+                        let downloadUrl = '';
+                        data.forEach(release => {
+                            release.assets.forEach(asset => {
+                                if (asset.name === fileName) {
+                                    downloadCount += asset.download_count;
+                                    downloadUrl = asset.browser_download_url;
+                                }
+                            });
+                        });
+                        const fileData = {
+                            fileName: fileName,
+                            downloadCount: downloadCount,
+                            downloadUrl: downloadUrl
+                        };
+                        resolve(fileData);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            });
+        }
+
+        function displayReleaseInfo(fileData, index) {
+            const releaseInfoHTML = `
+                <div class="release-info">
+                    <div class="download-info">
+                        <p>ダウンロード数: ${fileData.downloadCount}</p>
+                        <button class="download-button" onclick="downloadAsset('${fileData.downloadUrl}')">Download ${fileData.fileName}</button>
+                    </div>
+                </div>`;
+            document.getElementById(`release-info${index}`).innerHTML = releaseInfoHTML;
         }
 
         function downloadAsset(url) {
@@ -63,6 +92,9 @@
 
         // 初期読み込み時にリリース情報を取得
         fetchReleaseInfo();
+
+        // 30秒ごとにリリース情報を更新
+        setInterval(fetchReleaseInfo, 30000);
     </script>
 </body>
 </html>
