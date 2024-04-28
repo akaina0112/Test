@@ -7,7 +7,7 @@ const fileName3 = 'sample.txt'; // ファイル3の名前
 const fileName4 = 'document.pdf'; // ファイル4の名前
 const fileName5 = 'data.csv'; // ファイル5の名前
 
-const set= ' DL'; //名前
+const set= ' _DL'; //名前
 
 
 //プログラム保存
