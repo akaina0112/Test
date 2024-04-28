@@ -12,6 +12,8 @@
 
         .download-info {
             margin-left: 10px;
+            display: flex;
+            align-items: center;
         }
 
         .download-button {
@@ -44,7 +46,7 @@
                     const releaseInfoHTML = `
                         <div class="release-info">
                             <div class="download-info">
-                                <p> ${downloadCount} 数</p>
+                                <p>ダウンロード数: ${downloadCount}</p>
                                 <button class="download-button" onclick="downloadAsset('${downloadUrl}')">Download</button>
                             </div>
                         </div>`;
