@@ -1,7 +1,6 @@
-// githubConfig.js
-
 const githubConfig = {
-    owner: 'akaina0112', // GitHubリポジトリの所有者名
-    repo: 'Test' // GitHubリポジトリの名前
+    owner: 'akaina0112',
+    repo: 'Test'
 };
 
+export default githubConfig;
