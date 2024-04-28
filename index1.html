@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Releases</title>
+    <style>
+        .release-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .download-info {
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .download-button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="release-info1"></div>
+    <div id="release-info2"></div>
+    <div id="release-info3"></div>
+    <div id="release-info4"></div>
+    <div id="release-info5"></div>
+
+    <script type="module" src="functions.js"></script>
+    <script type="module">
+        import { fetchReleaseInfo, downloadAsset } from './functions.js';
+
+        fetchReleaseInfo()
+            .then(fileDataArray => {
+                fileDataArray.forEach((fileData, index) => {
+                    const releaseInfoHTML = `
+                        <div class="release-info">
+                            <div class="download-info">
+                                <button class="download-button" onclick="downloadAsset('${fileData.downloadUrl}')">Download</button>
+                                <p>: ${fileData.downloadCount}${set}</p>
+                            </div>
+                        </div>`;
+                    document.getElementById(`release-info${index + 1}`).innerHTML = releaseInfoHTML;
+                });
+            });
+
+        // 30秒ごとにリリース情報を更新
+        setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
+    </script>
+</body>
+</html>
