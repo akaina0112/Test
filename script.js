@@ -1,6 +1,7 @@
 const owner = 'akaina0112'; // GitHubリポジトリの所有者名
 const repo = 'Test'; // GitHubリポジトリの名前
 
+
 function fetchReleaseInfo() {
     const fileName1 = '20230704_185437.jpg'; // ファイル1の名前
     const fileName2 = 'example.zip'; // ファイル2の名前
