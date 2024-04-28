@@ -22,25 +22,21 @@
     </style>
 </head>
 <body>
-    <div id="release-info1"></div>
-    <div id="release-info2"></div>
-    <div id="release-info3"></div>
-    <div id="release-info4"></div>
+    <div id="release-info"></div>
 
-    <script src="githubConfig.js"></script>
-    <script src="fileConfig.js"></script>
+    <script src="githubAndFileConfig.js"></script>
     <script>
         function fetchReleaseInfo() {
             const { owner, repo } = githubConfig;
-            const { files } = fileConfig;
+            const { fileNames } = fileConfig;
 
-            files.forEach((fileName, index) => {
+            fileNames.forEach((fileName, index) => {
                 fetchFileData(fileName, owner, repo)
                     .then(fileData => {
                         displayReleaseInfo(fileData, index + 1);
                     })
                     .catch(error => {
-                        console.error(`Error fetching file${index + 1} info:`, error);
+                        console.error(`Error fetching ${fileName} info:`, error);
                     });
             });
         }
@@ -81,7 +77,7 @@
                         <button class="download-button" onclick="downloadAsset('${fileData.downloadUrl}')">Download ${fileData.fileName}</button>
                     </div>
                 </div>`;
-            document.getElementById(`release-info${index}`).innerHTML = releaseInfoHTML;
+            document.getElementById('release-info').insertAdjacentHTML('beforeend', releaseInfoHTML);
         }
 
         function downloadAsset(url) {
@@ -92,7 +88,7 @@
         fetchReleaseInfo();
 
         // 30秒ごとにリリース情報を更新
-        setInterval(fetchReleaseInfo, 300);
+        setInterval(fetchReleaseInfo, 30000);
     </script>
 </body>
 </html>
