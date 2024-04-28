@@ -7,6 +7,8 @@ const fileName3 = 'sample.txt'; // ファイル3の名前
 const fileName4 = 'document.pdf'; // ファイル4の名前
 const fileName5 = 'data.csv'; // ファイル5の名前
 
+//プログラム保存
+
 function fetchReleaseInfo() {
     fetchFileData(fileName1)
         .then(file1Data => {
