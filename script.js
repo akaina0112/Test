@@ -1,7 +1,16 @@
 const owner = 'akaina0112'; // GitHubリポジトリの所有者名
 const repo = 'Test'; // GitHubリポジトリの名前
-const fileNames = ['20230704_185437.jpg', 'example.zip', 'sample.txt', 'document.pdf', 'data.csv']; // ファイル名の配列
+const fileNames = [
+    '20230704_185437.jpg',
+    'example.zip',
+    'sample.txt',
+    'document.pdf',
+    'data.csv'
+];
+
 const set = ' DL'; // 名前
+
+
 
 function fetchReleaseInfo() {
     Promise.all(fileNames.map(fileName => fetchFileData(fileName)))
@@ -63,3 +72,4 @@ fetchReleaseInfo();
 
 // 30秒ごとにリリース情報を更新
 setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
+
