@@ -7,6 +7,9 @@ const fileName3 = 'sample.txt'; // ファイル3の名前
 const fileName4 = 'document.pdf'; // ファイル4の名前
 const fileName5 = 'data.csv'; // ファイル5の名前
 
+const set= 'DL'; //名前
+
+
 //プログラム保存
 
 function fetchReleaseInfo() {
@@ -75,7 +78,7 @@ function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Dat
         <div class="release-info">
             <div class="download-info">
                 <button class="download-button" onclick="downloadAsset('${file1Data.downloadUrl}')">Download</button>
-                <p>ダウンロード数: ${file1Data.downloadCount}</p>
+                <p>: ${file1Data.downloadCount}${set}</p>
             </div>
         </div>`;
     document.getElementById('release-info1').innerHTML = releaseInfoHTML1;
@@ -84,7 +87,7 @@ function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Dat
         <div class="release-info">
             <div class="download-info">
                 <button class="download-button" onclick="downloadAsset('${file2Data.downloadUrl}')">Download</button>
-                <p>ダウンロード数: ${file2Data.downloadCount}</p>
+                <p>: ${file2Data.downloadCount}${set}</p>
             </div>
         </div>`;
     document.getElementById('release-info2').innerHTML = releaseInfoHTML2;
@@ -93,7 +96,7 @@ function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Dat
         <div class="release-info">
             <div class="download-info">
                 <button class="download-button" onclick="downloadAsset('${file3Data.downloadUrl}')">Download</button>
-                <p>ダウンロード数: ${file3Data.downloadCount}</p>
+                <p>: ${file3Data.downloadCount}${set}</p>
             </div>
         </div>`;
     document.getElementById('release-info3').innerHTML = releaseInfoHTML3;
@@ -102,7 +105,7 @@ function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Dat
         <div class="release-info">
             <div class="download-info">
                 <button class="download-button" onclick="downloadAsset('${file4Data.downloadUrl}')">Download</button>
-                <p>ダウンロード数: ${file4Data.downloadCount}</p>
+                <p>: ${file4Data.downloadCount}${set}</p>
             </div>
         </div>`;
     document.getElementById('release-info4').innerHTML = releaseInfoHTML4;
@@ -111,7 +114,7 @@ function displayReleaseInfo(file1Data, file2Data, file3Data, file4Data, file5Dat
         <div class="release-info">
             <div class="download-info">
                 <button class="download-button" onclick="downloadAsset('${file5Data.downloadUrl}')">Download</button>
-                <p>ダウンロード数: ${file5Data.downloadCount}</p>
+                <p>: ${file5Data.downloadCount}${set}</p>
             </div>
         </div>`;
     document.getElementById('release-info5').innerHTML = releaseInfoHTML5;
