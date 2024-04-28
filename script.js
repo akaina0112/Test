@@ -128,4 +128,4 @@ function downloadAsset(url) {
 fetchReleaseInfo();
 
 // 30秒ごとにリリース情報を更新
-setInterval(fetchReleaseInfo, 30000); // 30秒ごとに更新
+setInterval(fetchReleaseInfo, 3000); // 30秒ごとに更新
