@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,15 +20,51 @@
         .download-button {
             margin-left: 10px;
         }
+
+        .cat-animation {
+            height: 50px; /* サイズを調整 */
+            width: 50px; /* サイズを調整 */
+            margin-left: 10px; /* 適切な余白を設定 */
+            animation: catJump 0.5s ease-in-out infinite; /* アニメーションを適用 */
+        }
+
+        @keyframes catJump {
+            0%,
+            100% {
+                transform: translateY(0); /* アニメーションの最初と最後の位置 */
+            }
+
+            50% {
+                transform: translateY(-20px); /* アニメーションの中間点の位置 */
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div id="release-info1"></div>
-    <div id="release-info2"></div>
-    <div id="release-info3"></div>
-    <div id="release-info4"></div>
-    <div id="release-info5"></div>
+    <div id="release-info1" class="release-info">
+        <!-- 1番目のrelease-infoに猫のアニメーションを追加 -->
+        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </div>
+    <div id="release-info2" class="release-info">
+        <!-- 2番目のrelease-infoに猫のアニメーションを追加 -->
+        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </div>
+    <div id="release-info3" class="release-info">
+        <!-- 3番目のrelease-infoに猫のアニメーションを追加 -->
+        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </div>
+    <div id="release-info4" class="release-info">
+        <!-- 4番目のrelease-infoに猫のアニメーションを追加 -->
+        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </div>
+    <div id="release-info5" class="release-info">
+        <!-- 5番目のrelease-infoに猫のアニメーションを追加 -->
+        <img class="cat-animation" src="https://i.imgur.com/Jt0TwLF.gif" alt="Jumping Cat">
+    </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
+
