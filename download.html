@@ -4,31 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Releases</title>
+    <style>
+        .release-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .download-info {
+            margin-left: 10px;
+        }
+
+        .download-button {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="release-info"></div>
 
     <script>
-        // main.js
-
-        import config from './config.js';
-
         function fetchReleaseInfo() {
-            fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/releases`)
+            const owner = 'akaina0112'; // GitHubリポジトリの所有者名
+            const repo = 'Test'; // GitHubリポジトリの名前
+
+            fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
                 .then(response => response.json())
                 .then(data => {
                     let releaseInfoHTML = '';
                     data.forEach(release => {
-                        releaseInfoHTML += `<h2>${release.name}</h2>`;
+                        releaseInfoHTML += `<div class="release-info"><h2>${release.name}</h2>`;
                         release.assets.forEach(asset => {
-                            releaseInfoHTML += `<p>${asset.name}: ${asset.download_count} downloads</p><button class="download-button" onclick="downloadAsset('${asset.browser_download_url}')">Download</button>`;
+                            releaseInfoHTML += `<div class="download-info"><p>${asset.name}: ${asset.download_count} downloads</p><button class="download-button" onclick="downloadAsset('${asset.browser_download_url}')">Download</button></div>`;
                         });
+                        releaseInfoHTML += `</div>`;
                     });
                     document.getElementById('release-info').innerHTML = releaseInfoHTML;
                 })
                 .catch(error => {
                     console.error('Error fetching release info:', error);
                 });
+        }
+
+        function downloadAsset(url) {
+            window.open(url, '_blank');
         }
 
         // 初期読み込み時にリリース情報を取得
