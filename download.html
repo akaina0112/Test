@@ -26,18 +26,29 @@
         function fetchReleaseInfo() {
             const owner = 'akaina0112'; // GitHubリポジトリの所有者名
             const repo = 'Test'; // GitHubリポジトリの名前
+            const fileName = 'example.zip'; // ダウンロード数を取得したいファイル名
 
             fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
                 .then(response => response.json())
                 .then(data => {
-                    let releaseInfoHTML = '';
+                    let downloadCount = 0;
+                    let downloadUrl = '';
                     data.forEach(release => {
-                        releaseInfoHTML += `<div class="release-info"><h2>${release.name}</h2>`;
                         release.assets.forEach(asset => {
-                            releaseInfoHTML += `<div class="download-info"><p>${asset.name}: ${asset.download_count} downloads</p><button class="download-button" onclick="downloadAsset('${asset.browser_download_url}')">Download</button></div>`;
+                            if (asset.name === fileName) {
+                                downloadCount += asset.download_count;
+                                downloadUrl = asset.browser_download_url;
+                            }
                         });
-                        releaseInfoHTML += `</div>`;
                     });
+                    const releaseInfoHTML = `
+                        <div class="release-info">
+                            <h2>${fileName}</h2>
+                            <div class="download-info">
+                                <p>${fileName}: ${downloadCount} downloads</p>
+                                <button class="download-button" onclick="downloadAsset('${downloadUrl}')">Download</button>
+                            </div>
+                        </div>`;
                     document.getElementById('release-info').innerHTML = releaseInfoHTML;
                 })
                 .catch(error => {
@@ -51,9 +62,6 @@
 
         // 初期読み込み時にリリース情報を取得
         fetchReleaseInfo();
-
-        // 30秒ごとにリリース情報を更新
-        setInterval(fetchReleaseInfo, 30000);
     </script>
 </body>
 </html>
