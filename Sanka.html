@@ -20,19 +20,31 @@
             font-weight: bold; /* フォントウェイトを太くする */
             transition: top 0.5s ease; /* スライドダウンのトランジション */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
+            text-align: center; /* テキストを中央揃え */
+        }
+        #notification span {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* テキストの周りを明るくする */
         }
         #notification button {
             margin-top: 10px;
             padding: 10px 20px; /* ボタンのパディングを増やす */
-            background-color: #ffffff;
-            color: #000000;
+            background-color: transparent;
+            background-image: url('./cat.gif'); /* 猫の画像を設定 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border: none;
             border-radius: 5px; /* ボタンの角を丸くする */
             cursor: pointer;
             font-size: 14px; /* ボタンのフォントサイズを大きくする */
+            animation: catWalk 2s linear infinite; /* 猫の歩行アニメーションを設定 */
         }
         #notification button:hover {
-            background-color: #e0e0e0; /* ホバー時の背景色を変更 */
+            opacity: 0.8; /* ホバー時に透明度を下げて少し暗くする */
+        }
+        @keyframes catWalk {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 0; }
         }
     </style>
 </head>
