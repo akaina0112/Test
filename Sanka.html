@@ -15,12 +15,14 @@
             color: white;
             padding: 20px 30px; /* パディングを増やして読みやすくする */
             border-radius: 8px; /* 角を丸くする */
-            z-index: 1000;
+          /*  z-index: 1000;*/
             font-size: 16px; /* フォントサイズを大きくする */
             font-weight: bold; /* フォントウェイトを太くする */
             transition: top 0.5s ease; /* スライドダウンのトランジション */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
             text-align: center; /* テキストを中央揃え */
+            z-index: 9999;
+           transition: top 0.3s ease; /* トランジション効果を追加 */
         }
         #notification span {
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* テキストの周りを明るくする */
