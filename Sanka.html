@@ -11,21 +11,28 @@
             top: -100px; /* 初期状態で上に隠しておく */
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #444444; /* 背景色を濃くしてコントラストを高める */
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 20px 30px; /* パディングを増やして読みやすくする */
+            border-radius: 8px; /* 角を丸くする */
             z-index: 1000;
+            font-size: 16px; /* フォントサイズを大きくする */
+            font-weight: bold; /* フォントウェイトを太くする */
             transition: top 0.5s ease; /* スライドダウンのトランジション */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
         }
         #notification button {
             margin-top: 10px;
-            padding: 5px 10px;
+            padding: 10px 20px; /* ボタンのパディングを増やす */
             background-color: #ffffff;
             color: #000000;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px; /* ボタンの角を丸くする */
             cursor: pointer;
+            font-size: 14px; /* ボタンのフォントサイズを大きくする */
+        }
+        #notification button:hover {
+            background-color: #e0e0e0; /* ホバー時の背景色を変更 */
         }
     </style>
 </head>
