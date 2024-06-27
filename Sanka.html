@@ -63,7 +63,7 @@
        // let akaina = 'This shortcut has been disabled.';
 
         document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && event.key === 'u' || event.ctrlKey && event.key === 's' || event.ctrlKey && event.key === 'p') {
+            if (event.ctrlKey && ( event.key === 'u' || event.key === 's' || event.key === 'p')) {
                 event.preventDefault();
                 showNotification('このショートカットは無効化されています。');
             }
