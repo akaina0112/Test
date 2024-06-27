@@ -51,7 +51,7 @@
 </head>
 <body>
     <div id="notification">
-        <span id="notification-message">このショートカットは無効化されています。</span>
+        <span id="notification-message"></span>
         <br>
         <button id="notification-close">OK</button>
     </div>
@@ -70,11 +70,15 @@
             const notificationMessage = document.getElementById('notification-message');
             notificationMessage.textContent = message;
             notification.style.display = 'block';
+            notification.style.top = '20px'; // 通知を表示する位置に設定
         }
 
         document.getElementById('notification-close').addEventListener('click', function() {
             const notification = document.getElementById('notification');
-            notification.style.display = 'none';
+            notification.style.top = '-100px'; // 通知を上に隠す位置に戻す
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 500); // トランジションの時間と合わせる
         });
     </script>
 </body>
