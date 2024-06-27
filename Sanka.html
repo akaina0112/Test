@@ -56,12 +56,12 @@
         <button id="notification-close">OK</button>
     </div>
     <script>
-        let akaina = 'This shortcut has been disabled.';
+       // let akaina = 'This shortcut has been disabled.';
 
         document.addEventListener('keydown', function(event) {
             if (event.ctrlKey && event.key === 'u') {
                 event.preventDefault();
-                showNotification('このショートカットは無効化されています。\n' + akaina);
+                showNotification('このショートカットは無効化されています。\nThis shortcut has been disabled.');
             }
         });
 
