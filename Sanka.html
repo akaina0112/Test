@@ -54,7 +54,7 @@
 <body>
     <div id="notification">
         <span id="notification-message"></span>
-        <span id="notification-message2"></span>
+        <span id="notification-message2">This shortcut has been disabled.</span>
         <br>
         <button id="notification-close">OK</button>
     </div>
@@ -64,8 +64,7 @@
         document.addEventListener('keydown', function(event) {
             if (event.ctrlKey && event.key === 'u' || event.ctrlKey && event.key === 's' || event.ctrlKey && event.key === 'p') {
                 event.preventDefault();
-                showNotification('このショートカットは無効化されています。\nThis shortcut has been disabled.');
-                showNotification2('このショートカットは無効化されています。\nThis shortcut has been disabled.');
+                showNotification('このショートカットは無効化されています。');
             }
         });
 
@@ -76,14 +75,7 @@
             notification.style.display = 'block';
             notification.style.top = '20px'; // 通知を表示する位置に設定
         }
-        function showNotification2(message) {
-            const notification = document.getElementById('notification');
-            const notificationMessage2 = document.getElementById('notification-message2');
-            notificationMessage.textContent = message;
-            notification.style.display = 'block';
-            notification.style.top = '20px'; // 通知を表示する位置に設定
-        }
-
+        
         document.getElementById('notification-close').addEventListener('click', function() {
             const notification = document.getElementById('notification');
             notification.style.top = '-100px'; // 通知を上に隠す位置に戻す
