@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BGM自動再生テスト</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Autoplay Example</title>
 </head>
 <body>
+  <h1>タッチしてオーディオを再生</h1>
+  <p>このページをタッチまたはクリックするとオーディオが再生されます。</p>
 
-      <script>
-window.addEventListener('DOMContentLoaded', function() {
-  // 警告ダイアログを表示
-  if (confirm('BGMを再生しますか？')) {
-    // ユーザーが「OK」を押した場合
-    const audioElement = document.createElement('audio');
-    audioElement.src = './bgm/bgm.mp3';
-    audioElement.loop = true; // ループ再生する場合
-    document.body.appendChild(audioElement);
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const audioElement = document.createElement('audio');
+      audioElement.src = 'https://akaina0112.github.io/Test/bgm.mp3'; // オーディオファイルのURL
+      audioElement.loop = true; // ループ再生する場合
+      audioElement.volume = 0.7; // 音量を70に設定
+      document.body.appendChild(audioElement);
 
-    audioElement.play().then(() => {
-      console.log('BGMが再生されました。');
-    }).catch(error => {
-      console.log('自動再生がブロックされました:', error);
+      // ユーザーのタッチまたはクリックイベントを待ってから再生を開始
+      function playAudio() {
+        audioElement.play().catch(error => {
+          console.log('オーディオの再生に失敗しました:', error);
+        });
+        document.body.removeEventListener('click', playAudio);
+        document.body.removeEventListener('touchstart', playAudio);
+      }
+
+      document.body.addEventListener('click', playAudio);
+      document.body.addEventListener('touchstart', playAudio);
     });
-  } else {
-    // ユーザーが「キャンセル」を押した場合
-    console.log('BGM再生がキャンセルされました。');
-  }
-});
-
   </script>
 </body>
 </html>
