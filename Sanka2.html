@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <script>
+<script>
 window.onload = function() {
   // コンテンツ領域のスタイルをJavaScriptで設定する
   const content = document.createElement('div');
@@ -42,27 +42,25 @@ window.onload = function() {
 
   // JavaScriptでCSSスタイルを適用する場合
   const style = document.createElement('style');
-  style.textContent = ` 
-
+  style.textContent = `
     /* CSSスライドショー設定 */
-@keyframes slide1 {
-    0% { opacity: 1; transform: scale(1.2); }
-    10% { opacity: 1; }
-    20% { opacity: 1; }
-    50% { opacity: 1; }
-    60% { opacity: 1; }
-    100% { opacity: 1; transform: scale(1.7); animation: slide2 5s linear forwards; }
-}
+    @keyframes slide1 {
+      0% { opacity: 1; transform: scale(1.2); }
+      10% { opacity: 1; }
+      20% { opacity: 1; }
+      50% { opacity: 1; }
+      60% { opacity: 1; }
+      100% { opacity: 1; transform: scale(1.7); animation: slide2 5s linear forwards; }
+    }
 
-@keyframes slide2 {
-    0% { opacity: 1; transform: scale(1.7); }
-    10% { opacity: 1; }
-    20% { opacity: 1; }
-    50% { opacity: 1; }
-    60% { opacity: 1; }
-    100% { opacity: 1; transform: scale(1.2); animation: slide1 5s linear forwards; }
-}
-
+    @keyframes slide2 {
+      0% { opacity: 1; transform: scale(1.7); }
+      10% { opacity: 1; }
+      20% { opacity: 1; }
+      50% { opacity: 1; }
+      60% { opacity: 1; }
+      100% { opacity: 1; transform: scale(1.2); animation: slide1 5s linear forwards; }
+    }
 
     /* 画像ブロック */
     #mainimg {
@@ -77,21 +75,11 @@ window.onload = function() {
 
     /* １枚目 */
     .slide1 {
-    
-            /* 画像を常に天地左右の中央に配置 */
-            background-position: center center;
-            
-            /* 画像をタイル状に繰り返し表示しない */
-            background-repeat: no-repeat;
-            
-            /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
-            background-attachment: fixed;
-            
-            /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
-            background-size: cover;
-            
-            /* 背景画像が読み込まれる前に表示される背景のカラー */
-            background-color: #464646;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-color: #464646;
       animation-timing-function: linear;
       animation-duration: 15s; /* 実行する時間。「s」は秒の事。 */
       animation-iteration-count: infinite; /* 実行する回数。「infinite」は無限に繰り返す意味。 */
@@ -101,9 +89,9 @@ window.onload = function() {
       width: 100%;
       height: 100%;
       animation-fill-mode: both;
-      animation-delay: 1s; 
+      animation-delay: 1s;
       background: url(./background.png) no-repeat center center/cover;
-    animation-name: slide1; /* 上で設定しているキーフレーム（keyframes）の名前 */
+      animation-name: slide1; /* 上で設定しているキーフレーム（keyframes）の名前 */
     }
 
     /* 通知のスタイル */
@@ -177,35 +165,34 @@ window.onload = function() {
 
   // ページをクリックしたときに createAndPlayAudio 関数を実行
   document.body.addEventListener('click', createAndPlayAudio);
-    //アニメーションを切り替え関数      function switchSlide() {
-        slide1.style.opacity = '1'; // 初期状態でslide1を表示
 
-        slide1.addEventListener('animationend', function() {
-          // slide1のアニメーションが終了したら、次の画像（slide2）へ切り替える
-          slide1.style.opacity = '0'; // 現在の画像をフェードアウトさせる
-          slide2.style.opacity = '1'; // 次の画像をフェードインさせる
-          slide1.style.animation = 'none'; // アニメーションをリセット
-          slide2.style.animation = 'slide2 5s linear forwards'; // slide2のアニメーションを開始
-        });
+  // アニメーションを切り替え関数
+  function switchSlide() {
+    slide1.style.opacity = '1'; // 初期状態でslide1を表示
 
-        slide2.addEventListener('animationend', function() {
-          // slide2のアニメーションが終了したら、次の画像（slide1）へ切り替える
-          slide2.style.opacity = '0'; // 現在の画像をフェードアウトさせる
-          slide1.style.opacity = '1'; // 次の画像をフェードインさせる
-          slide2.style.animation = 'none'; // アニメーションをリセット
-          slide1.style.animation = 'slide1 5s linear forwards'; // slide1のアニメーションを開始
-        });
+    slide1.addEventListener('animationend', function() {
+      // slide1のアニメーションが終了したら、次の画像（slide2）へ切り替える
+      slide1.style.opacity = '0'; // 現在の画像をフェードアウトさせる
+      slide2.style.opacity = '1'; // 次の画像をフェードインさせる
+      slide1.style.animation = 'none'; // アニメーションをリセット
+      slide2.style.animation = 'slide2 5s linear forwards'; // slide2のアニメーションを開始
+    });
 
-        // 初期アニメーションを開始
-        slide1.style.animation = 'slide1 5s linear forwards';
-      }
+    slide2.addEventListener('animationend', function() {
+      // slide2のアニメーションが終了したら、次の画像（slide1）へ切り替える
+      slide2.style.opacity = '0'; // 現在の画像をフェードアウトさせる
+      slide1.style.opacity = '1'; // 次の画像をフェードインさせる
+      slide2.style.animation = 'none'; // アニメーションをリセット
+      slide1.style.animation = 'slide1 5s linear forwards'; // slide1のアニメーションを開始
+    });
 
-      // アニメーションを切り替え関数を要素作成後に実行
-      switchSlide();
+    // 初期アニメーションを開始
+    slide1.style.animation = 'slide1 5s linear forwards';
+  }
+
+  // アニメーションを切り替え関数を要素作成後に実行
+  switchSlide();
 };
-
-
-
-  </script>
+</script>
 </body>
 </html>
