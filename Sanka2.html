@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Audio Autoplay Example</title>
+  <title>Music Player</title>
 </head>
 <body>
-  <h1>クリックしてオーディオを再生</h1>
-  <p>このページをクリックするとオーディオが再生されます。</p>
+  <h1>音楽を再生する</h1>
+  
+  <!-- 音楽プレーヤー -->
+  <audio id="musicplayer">
+    <source src="https://akaina0112.github.io/Test/bgm.mp3" type="audio/mpeg">
+    <!-- 必要に応じて他のフォーマットを追加 -->
+    <!-- <source src="/music/chapter1.ogg" type="audio/ogg" /> -->
+  </audio>
 
+  <!-- JavaScript -->
   <script>
+    // ページが読み込まれた後に実行する関数
     window.onload = function() {
-      const audioElement = new Audio('https://akaina0112.github.io/Test/bgm.mp3');
-      audioElement.loop = true;
-      audioElement.volume = 0.7;
+      const audioElement = document.getElementById('musicplayer');
 
-      function playAudio() {
+      // 音楽を再生する関数
+      function playMusic() {
         audioElement.play().then(() => {
-          console.log('オーディオが再生されました');
-          document.body.removeEventListener('click', playAudio); // 再生が成功したらリスナーを削除
+          console.log('音楽が再生されました');
         }).catch(error => {
-          console.log('オーディオの再生に失敗しました:', error);
+          console.log('音楽の再生に失敗しました:', error);
         });
+
+        // イベントリスナーを削除（再生が開始されたら不要）
+        document.body.removeEventListener('click', playMusic);
       }
 
-      document.body.addEventListener('click', playAudio);
+      // ページをクリックしたときに playMusic 関数を実行
+      document.body.addEventListener('click', playMusic);
     };
   </script>
 </body>
