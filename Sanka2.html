@@ -41,14 +41,24 @@ window.onload = function() {
   const style = document.createElement('style');
   style.textContent = `
     /* CSSスライドショー設定 */
-    @keyframes slide1 {
-      0% { opacity: 1; transform: scale(1); }
-      10% { opacity: 1; }
-      20% { opacity: 1; }
-      50% { opacity: 1; }
-      60% { opacity: 1; }
-      100% { opacity: 1; transform: scale(1.5); }
-    }
+@keyframes slide1 {
+    0% { opacity: 1; transform: scale(1); }
+    10% { opacity: 1; }
+    20% { opacity: 1; }
+    50% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 1; transform: scale(1.5); animation: slide2 5s linear forwards; }
+}
+
+@keyframes slide2 {
+    0% { opacity: 1; transform: scale(1.5); }
+    10% { opacity: 1; }
+    20% { opacity: 1; }
+    50% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); animation: slide1 5s linear forwards; }
+}
+
 
     /* 画像ブロック */
     #mainimg {
