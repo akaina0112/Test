@@ -37,6 +37,15 @@
       // CSSアニメーションの定義をJavaScriptで追加する
       const style = document.createElement('style');
       style.textContent = `
+      .background {
+  position: fixed;
+  /* top: 0;
+  left: 0; */
+  width: 600%; /* 画像を横に2倍に広げる */
+  height: 100vh; /* 画面の高さいっぱいに設定 */
+  background: url('./background.png') repeat-x;
+  animation: scrollBackground 60s linear infinite; /* アニメーションの設定 */
+}
         @keyframes scrollBackground {
           0% {
             transform: translateX(0); /* 最初の位置 */
