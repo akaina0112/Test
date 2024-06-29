@@ -7,29 +7,24 @@
 </head>
 <body>
   <h1>音楽を再生する</h1>
-  
-  <!-- 音楽プレーヤーの表示場所 -->
-  <div id="player-container"></div>
 
   <!-- JavaScript -->
   <script>
     window.onload = function() {
       function createAndPlayAudio() {
-        const playerContainer = document.getElementById('player-container');
-        
         // 音楽プレーヤーを作成
         const audioElement = document.createElement('audio');
         audioElement.id = 'musicplayer';
         audioElement.loop = true;
         audioElement.volume = 0.5;
-       // audioElement.controls = true; // プレーヤーコントロールを表示
+      //  audioElement.controls = true; // プレーヤーコントロールを表示
         
         const sourceElement = document.createElement('source');
         sourceElement.src = 'https://akaina0112.github.io/Test/bgm.mp3';
         sourceElement.type = 'audio/mpeg';
         
         audioElement.appendChild(sourceElement);
-        playerContainer.appendChild(audioElement);
+        document.body.appendChild(audioElement); // オーディオプレーヤーをページに追加
 
         // 音楽を再生する
         audioElement.play().then(() => {
