@@ -8,114 +8,107 @@
 <body>
   <h1>音楽を再生する</h1>
 
-  <!-- JavaScript -->
   <script>
-window.onload = function() {
-  // ページが読み込まれたときに実行される関数
-  function createAndPlayAudio() {
-    // 音楽プレーヤーを作成
-    const audioElement = document.createElement('audio');
-    audioElement.id = 'musicplayer';
-    audioElement.loop = true; // ループ再生
-    audioElement.volume = 0.2; // 音量設定
-    //audioElement.controls = true; // コントロールを表示
-
-    // 音楽ファイルの設定
-    const sourceElement = document.createElement('source');
-    sourceElement.src = 'https://akaina0112.github.io/Test/bgm.mp3';
-    sourceElement.type = 'audio/mpeg';
-
-    audioElement.appendChild(sourceElement); // <audio>要素に音楽ファイルを追加
-    document.body.appendChild(audioElement); // <body>要素に<audio>要素を追加
-
-    // 音楽情報を表示する要素を作成
-    const musicInfo = document.createElement('div');
-    musicInfo.id = 'music-info';
-    musicInfo.textContent = '音楽名: Nightcore - Vicetone - Nevada'; // 音楽名を設定
-    document.body.appendChild(musicInfo); // <body>要素に<div>要素を追加
-
-    // CSSスタイルを動的に追加
-    const style = document.createElement('style');
-    style.textContent = `
-      #music-info {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-      }
-      #music-info.show {
-        opacity: 1;
-      }
-    `;
-    document.head.appendChild(style); // <head>要素に<style>要素を追加
-
-    // 音楽情報の表示を通知風に
-    setTimeout(() => {
-      musicInfo.classList.add('show'); // 'show'クラスを追加して表示
-      console.log('音楽名を表示');
-    }, 100); // 少し遅延させて表示（ミリ秒単位）
-
-    // 5秒後に音楽情報を消す
-    setTimeout(() => {
-      musicInfo.classList.remove('show'); // 'show'クラスを削除して非表示
-      console.log('音楽名を消去');
-    }, 5100); // 5秒後に消えるように設定（ミリ秒単位）
-
-    // 音楽を再生する
-    audioElement.play().then(() => {
-      console.log('音楽が再生されました');
-    }).catch(error => {
-      console.log('音楽の再生に失敗しました:', error);
-    });
-
-    // イベントリスナーを削除（再生が開始されたら不要）
-    document.body.removeEventListener('click', createAndPlayAudio);
-  }
-
-  // ページをクリックしたときに createAndPlayAudio 関数を実行
-  document.body.addEventListener('click', createAndPlayAudio);
-};
-        // JavaScriptコード
     window.onload = function() {
       // 背景のスタイルをJavaScriptで設定する
-      const background = document.querySelector('.background');
+      const background = document.createElement('div');
+      background.classList.add('background');
       background.style.position = 'fixed';
       background.style.top = '0';
       background.style.left = '0';
-      background.style.width = '200%';
-      background.style.height = '100vh';
-      background.style.background = 'url('./background.png') repeat-x';
-      background.style.animation = 'scrollBackground 60s linear infinite';
+      background.style.width = '200%'; /* 画像を横に2倍に広げる */
+      background.style.height = '100vh'; /* 画面の高さいっぱいに設定 */
+      background.style.background = 'url(\'./background.png\') repeat-x';
+      background.style.animation = 'scrollBackground 60s linear infinite'; /* アニメーションの設定 */
+      document.body.appendChild(background);
 
       // コンテンツ領域のスタイルをJavaScriptで設定する
-      const content = document.querySelector('.content');
+      const content = document.createElement('div');
+      content.classList.add('content');
       content.style.padding = '20px';
-      content.style.marginTop = '20vh';
+      content.style.marginTop = '20vh'; /* コンテンツを上にオフセット */
       content.style.textAlign = 'center';
       content.style.color = 'white';
       content.style.fontSize = '24px';
-      content.style.zIndex = '1';
+      content.style.zIndex = '1'; /* コンテンツが背景の上に表示されるように設定 */
+      content.textContent = '音楽を再生する';
+      document.body.appendChild(content);
 
       // CSSアニメーションの定義をJavaScriptで追加する
       const style = document.createElement('style');
       style.textContent = `
         @keyframes scrollBackground {
           0% {
-            transform: translateX(0);
+            transform: translateX(0); /* 最初の位置 */
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* 画像を左に50%スクロール */
           }
+        }
+        #music-info {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 10px 20px;
+          border-radius: 5px;
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+        }
+        #music-info.show {
+          opacity: 1;
         }
       `;
       document.head.appendChild(style);
 
-      // ここに追加のJavaScriptコードを記述する
+      // 音楽プレーヤーを作成し再生する関数
+      function createAndPlayAudio() {
+        // 音楽プレーヤーを作成
+        const audioElement = document.createElement('audio');
+        audioElement.id = 'musicplayer';
+        audioElement.loop = true; // ループ再生
+        audioElement.volume = 0.2; // 音量設定
+
+        // 音楽ファイルの設定
+        const sourceElement = document.createElement('source');
+        sourceElement.src = 'https://akaina0112.github.io/Test/bgm.mp3';
+        sourceElement.type = 'audio/mpeg';
+
+        audioElement.appendChild(sourceElement); // <audio>要素に音楽ファイルを追加
+        document.body.appendChild(audioElement); // <body>要素に<audio>要素を追加
+
+        // 音楽情報を表示する要素を作成
+        const musicInfo = document.createElement('div');
+        musicInfo.id = 'music-info';
+        musicInfo.textContent = '音楽名: Nightcore - Vicetone - Nevada'; // 音楽名を設定
+        document.body.appendChild(musicInfo); // <body>要素に<div>要素を追加
+
+        // 音楽情報の表示を通知風に
+        setTimeout(() => {
+          musicInfo.classList.add('show'); // 'show'クラスを追加して表示
+          console.log('音楽名を表示');
+        }, 100); // 少し遅延させて表示（ミリ秒単位）
+
+        // 5秒後に音楽情報を消す
+        setTimeout(() => {
+          musicInfo.classList.remove('show'); // 'show'クラスを削除して非表示
+          console.log('音楽名を消去');
+        }, 5100); // 5秒後に消えるように設定（ミリ秒単位）
+
+        // 音楽を再生する
+        audioElement.play().then(() => {
+          console.log('音楽が再生されました');
+        }).catch(error => {
+          console.log('音楽の再生に失敗しました:', error);
+        });
+
+        // イベントリスナーを削除（再生が開始されたら不要）
+        document.body.removeEventListener('click', createAndPlayAudio);
+      }
+
+      // ページをクリックしたときに createAndPlayAudio 関数を実行
+      document.body.addEventListener('click', createAndPlayAudio);
     };
   </script>
 </body>
