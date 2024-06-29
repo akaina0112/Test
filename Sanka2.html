@@ -175,6 +175,35 @@ window.onload = function() {
   // ページをクリックしたときに createAndPlayAudio 関数を実行
   document.body.addEventListener('click', createAndPlayAudio);
 };
+    /*アニメーションを切り替え*/
+    // アニメーション終了時に次の画像へ切り替える関数
+function switchSlide() {
+    const slide1 = document.querySelector('.slide1');
+    const slide2 = document.querySelector('.slide2');
+
+    slide1.addEventListener('animationend', function() {
+        // slide1のアニメーションが終了したら、次の画像（slide2）へ切り替える
+        slide1.style.opacity = '0'; // 現在の画像をフェードアウトさせる
+        slide2.style.opacity = '1'; // 次の画像をフェードインさせる
+        slide1.style.transform = 'scale(1.2)'; // 拡大縮小も設定
+        slide2.style.transform = 'scale(1.7)'; // 次の画像も設定
+    });
+
+    slide2.addEventListener('animationend', function() {
+        // slide2のアニメーションが終了したら、次の画像（slide1）へ切り替える
+        slide2.style.opacity = '0'; // 現在の画像をフェードアウトさせる
+        slide1.style.opacity = '1'; // 次の画像をフェードインさせる
+        slide2.style.transform = 'scale(1.2)'; // 拡大縮小も設定
+        slide1.style.transform = 'scale(1.7)'; // 次の画像も設定
+    });
+}
+
+// ページロード後に実行
+window.onload = function() {
+    // ここで画像切り替えの関数を呼び出す
+    switchSlide();
+};
+
   </script>
 </body>
 </html>
