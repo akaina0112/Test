@@ -64,31 +64,35 @@
         <br>
         <button id="notification-close">OK</button>
     </div>
-    <script>
-       // let akaina = 'This shortcut has been disabled.';
+<script>
+// let akaina = 'This shortcut has been disabled.';
 
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && ( event.key === 'u' || event.key === 's' || event.key === 'p')) {
-                event.preventDefault();
-                showNotification('このショートカットは無効化されています。');
-            }
-        });
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'p')) {
+        event.preventDefault();
+        showNotification('このショートカットは無効化されています。');
+    }
+});
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+    showNotification('右クリックは無効化されています。');
+});
 
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const notificationMessage = document.getElementById('notification-message');
-            notificationMessage.textContent = message;
-            notification.style.display = 'block';
-            notification.style.top = '20px'; // 通知を表示する位置に設定
-        }
-        
-        document.getElementById('notification-close').addEventListener('click', function() {
-            const notification = document.getElementById('notification');
-            notification.style.top = '-100px'; // 通知を上に隠す位置に戻す
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 500); // トランジションの時間と合わせる
-        });
-    </script>
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    notificationMessage.textContent = message;
+    notification.style.display = 'block';
+    notification.style.top = '20px'; // 通知を表示する位置に設定
+}
+
+document.getElementById('notification-close').addEventListener('click', function() {
+    const notification = document.getElementById('notification');
+    notification.style.top = '-100px'; // 通知を上に隠す位置に戻す
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 500); // トランジションの時間と合わせる
+});
+</script>
 </body>
 </html>
