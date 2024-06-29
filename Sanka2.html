@@ -9,8 +9,6 @@
 
   <script>
 window.onload = function() {
-  //アニメーションを切り替え関数
-    switchSlide();
   // コンテンツ領域のスタイルをJavaScriptで設定する
   const content = document.createElement('div');
   content.classList.add('content');
@@ -176,7 +174,9 @@ window.onload = function() {
   // ページをクリックしたときに createAndPlayAudio 関数を実行
   document.body.addEventListener('click', createAndPlayAudio);
 };
-    /*アニメーションを切り替え*/
+    /*アニメーションを切り替え*/ 
+    //アニメーションを切り替え関数
+    switchSlide();
     // アニメーション終了時に次の画像へ切り替える関数
 function switchSlide() {
     const slide1 = document.querySelector('.slide1');
