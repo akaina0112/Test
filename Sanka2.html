@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', function() {
   const audioElement = document.createElement('audio');
   audioElement.src = './bgm.mp3';
   audioElement.loop = true; // ループ再生する場合
+　audioElement.volume = 0.7; // 音量を70に設定
   document.body.appendChild(audioElement);
 
   audioElement.autoplay = true;
