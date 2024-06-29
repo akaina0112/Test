@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGM自動再生テスト</title>
+</head>
+<body>
+    <script>
+window.addEventListener('DOMContentLoaded', function() {
+  const audioElement = document.createElement('audio');
+  audioElement.src = './bgm.mp3';
+  audioElement.loop = true; // ループ再生する場合
+  document.body.appendChild(audioElement);
+
+  audioElement.autoplay = true;
+  audioElement.play().catch(error => {
+    console.log('自動再生がブロックされました:', error);
+  });
+});
+    </script>
+</body>
+</html>
