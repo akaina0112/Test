@@ -8,21 +8,30 @@
 <body>
   <h1>音楽を再生する</h1>
   
-  <!-- 音楽プレーヤー -->
-  <audio id="musicplayer"　loop>
-    <source src="https://akaina0112.github.io/Test/bgm.mp3" type="audio/mpeg">
-    <!-- 必要に応じて他のフォーマットを追加 -->
-    <!-- <source src="/music/chapter1.ogg" type="audio/ogg" /> -->
-  </audio>
+  <!-- 音楽プレーヤーの表示場所 -->
+  <div id="player-container"></div>
 
   <!-- JavaScript -->
   <script>
-    // ページが読み込まれた後に実行する関数
     window.onload = function() {
-      const audioElement = document.getElementById('musicplayer');
-　　　　audioElement.volume = 0.5;
-      // 音楽を再生する関数
-      function playMusic() {
+      function createAndPlayAudio() {
+        const playerContainer = document.getElementById('player-container');
+        
+        // 音楽プレーヤーを作成
+        const audioElement = document.createElement('audio');
+        audioElement.id = 'musicplayer';
+        audioElement.loop = true;
+        audioElement.volume = 0.5;
+       // audioElement.controls = true; // プレーヤーコントロールを表示
+        
+        const sourceElement = document.createElement('source');
+        sourceElement.src = 'https://akaina0112.github.io/Test/bgm.mp3';
+        sourceElement.type = 'audio/mpeg';
+        
+        audioElement.appendChild(sourceElement);
+        playerContainer.appendChild(audioElement);
+
+        // 音楽を再生する
         audioElement.play().then(() => {
           console.log('音楽が再生されました');
         }).catch(error => {
@@ -30,11 +39,11 @@
         });
 
         // イベントリスナーを削除（再生が開始されたら不要）
-        document.body.removeEventListener('click', playMusic);
+        document.body.removeEventListener('click', createAndPlayAudio);
       }
 
-      // ページをクリックしたときに playMusic 関数を実行
-      document.body.addEventListener('click', playMusic);
+      // ページをクリックしたときに createAndPlayAudio 関数を実行
+      document.body.addEventListener('click', createAndPlayAudio);
     };
   </script>
 </body>
