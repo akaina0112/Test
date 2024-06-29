@@ -10,25 +10,22 @@
   <p>このページをクリックするとオーディオが再生されます。</p>
 
   <script>
-    window.addEventListener('DOMContentLoaded', function() {
-      const audioElement = new Audio('https://akaina0112.github.io/Test/bgm.mp3'); // オーディオファイルのURL
-      audioElement.loop = true; // ループ再生する場合
-      audioElement.volume = 0.7; // 音量を70に設定
+    window.onload = function() {
+      const audioElement = new Audio('https://akaina0112.github.io/Test/bgm.mp3');
+      audioElement.loop = true;
+      audioElement.volume = 0.7;
 
-      // ページをクリックしたときにオーディオを再生
       function playAudio() {
         audioElement.play().then(() => {
           console.log('オーディオが再生されました');
+          document.body.removeEventListener('click', playAudio); // 再生が成功したらリスナーを削除
         }).catch(error => {
           console.log('オーディオの再生に失敗しました:', error);
         });
-
-        // イベントリスナーを削除
-        document.body.removeEventListener('click', playAudio);
       }
 
       document.body.addEventListener('click', playAudio);
-    });
+    };
   </script>
 </body>
 </html>
