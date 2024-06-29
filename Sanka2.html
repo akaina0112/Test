@@ -11,17 +11,19 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      const audioElement = document.createElement('audio');
-      audioElement.src = 'https://akaina0112.github.io/Test/bgm.mp3'; // オーディオファイルのURL
+      const audioElement = new Audio('https://akaina0112.github.io/Test/bgm.mp3'); // オーディオファイルのURL
       audioElement.loop = true; // ループ再生する場合
       audioElement.volume = 0.7; // 音量を70に設定
-      document.body.appendChild(audioElement);
 
       // ユーザーのタッチまたはクリックイベントを待ってから再生を開始
       function playAudio() {
-        audioElement.play().catch(error => {
+        audioElement.play().then(() => {
+          console.log('オーディオが再生されました');
+        }).catch(error => {
           console.log('オーディオの再生に失敗しました:', error);
         });
+
+        // 一度再生が開始されたらイベントリスナーを削除
         document.body.removeEventListener('click', playAudio);
         document.body.removeEventListener('touchstart', playAudio);
       }
