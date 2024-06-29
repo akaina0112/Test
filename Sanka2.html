@@ -55,7 +55,14 @@
         // 音楽情報の表示を通知風に
         setTimeout(() => {
           musicInfo.classList.add('show');
+          console.log('音楽名を表示');
         }, 100); // 少し遅延させて表示
+
+        // 5秒後に音楽情報を消す
+        setTimeout(() => {
+          musicInfo.classList.remove('show');
+          console.log('音楽名を消去');
+        }, 5100); // 5秒後に消えるように設定
 
         // 音楽を再生する
         audioElement.play().then(() => {
