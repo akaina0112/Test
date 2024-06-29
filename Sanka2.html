@@ -8,20 +8,25 @@
 <body>
 
       <script>
-    window.addEventListener('DOMContentLoaded', function() {
-      const audioElement = document.createElement('audio');
-      audioElement.src = './bgm.mp3';
-      audioElement.loop = true; // ループ再生する場合
-      audioElement.volume = 0.7; // 音量を70に設定
-      document.body.appendChild(audioElement);
+window.addEventListener('DOMContentLoaded', function() {
+  // 警告ダイアログを表示
+  if (confirm('BGMを再生しますか？')) {
+    // ユーザーが「OK」を押した場合
+    const audioElement = document.createElement('audio');
+    audioElement.src = './bgm.mp3';
+    audioElement.loop = true; // ループ再生する場合
+    document.body.appendChild(audioElement);
 
-      // ユーザーのクリックイベントを待ってから再生を開始
-      document.body.addEventListener('click', function() {
-        audioElement.play().catch(error => {
-          console.log('オーディオの再生に失敗しました:', error);
-        });
-      }, { once: true }); // 一度だけイベントを実行する
+    audioElement.autoplay = true;
+    audioElement.play().catch(error => {
+      console.log('自動再生がブロックされました:', error);
     });
+  } else {
+    // ユーザーが「キャンセル」を押した場合
+    console.log('BGM再生がキャンセルされました。');
+  }
+});
+
   </script>
 </body>
 </html>
