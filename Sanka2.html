@@ -4,6 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Player</title>
+  <style>
+    /* CSS */
+    #music-info {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: none; /* 初期状態は非表示 */
+    }
+  </style>
 </head>
 <body>
   <h1>音楽を再生する</h1>
@@ -17,14 +31,21 @@
         audioElement.id = 'musicplayer';
         audioElement.loop = true;
         audioElement.volume = 0.5;
-      //  audioElement.controls = true; // プレーヤーコントロールを表示
-        
+        audioElement.controls = true;
+
         const sourceElement = document.createElement('source');
         sourceElement.src = 'https://akaina0112.github.io/Test/bgm.mp3';
         sourceElement.type = 'audio/mpeg';
-        
+
         audioElement.appendChild(sourceElement);
-        document.body.appendChild(audioElement); // オーディオプレーヤーをページに追加
+        document.body.appendChild(audioElement);
+
+        // 音楽情報を表示する要素を作成
+        const musicInfo = document.createElement('div');
+        musicInfo.id = 'music-info';
+        musicInfo.textContent = '音楽名: Nightcore - Vicetone - Nevada '; // 音楽名を設定
+        document.body.appendChild(musicInfo);
+        musicInfo.style.display = 'Nightcore - Vicetone - Nevada '; // 音楽名を表示
 
         // 音楽を再生する
         audioElement.play().then(() => {
