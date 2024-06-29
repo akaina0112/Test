@@ -20,7 +20,7 @@
     // ページが読み込まれた後に実行する関数
     window.onload = function() {
       const audioElement = document.getElementById('musicplayer');
-
+　　　　audioElement.volume = 0.5;
       // 音楽を再生する関数
       function playMusic() {
         audioElement.play().then(() => {
