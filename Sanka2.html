@@ -80,6 +80,43 @@ window.onload = function() {
   // ページをクリックしたときに createAndPlayAudio 関数を実行
   document.body.addEventListener('click', createAndPlayAudio);
 };
+        // JavaScriptコード
+    window.onload = function() {
+      // 背景のスタイルをJavaScriptで設定する
+      const background = document.querySelector('.background');
+      background.style.position = 'fixed';
+      background.style.top = '0';
+      background.style.left = '0';
+      background.style.width = '200%';
+      background.style.height = '100vh';
+      background.style.background = 'url(\'./background.png\') repeat-x';
+      background.style.animation = 'scrollBackground 60s linear infinite';
+
+      // コンテンツ領域のスタイルをJavaScriptで設定する
+      const content = document.querySelector('.content');
+      content.style.padding = '20px';
+      content.style.marginTop = '20vh';
+      content.style.textAlign = 'center';
+      content.style.color = 'white';
+      content.style.fontSize = '24px';
+      content.style.zIndex = '1';
+
+      // CSSアニメーションの定義をJavaScriptで追加する
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes scrollBackground {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // ここに追加のJavaScriptコードを記述する
+    };
   </script>
 </body>
 </html>
