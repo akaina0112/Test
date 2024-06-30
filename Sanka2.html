@@ -156,7 +156,7 @@ window.onload = function() {
 
     // 音楽情報を表示する要素を作成
     const musicInfo = document.createElement('div');
-    musicInfo.id = 'music-info';
+    musicInfo.classList.add('music-info');
     musicInfo.textContent = '音楽名: Nightcore - Vicetone - Nevada'; // 音楽名を設定
     document.body.appendChild(musicInfo); // <body>要素に<div>要素を追加
 
@@ -171,6 +171,7 @@ window.onload = function() {
       musicInfo.classList.remove('show'); // 'show'クラスを削除して非表示
       console.log('音楽名を消去');
     }, 5100); // 5秒後に消えるように設定（ミリ秒単位）
+
 
     // 音楽を再生する
     audioElement.play().then(() => {
