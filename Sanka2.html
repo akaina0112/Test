@@ -115,7 +115,7 @@ window.onload = function() {
     }
 
     .music-info {
-   //   display: none; /* 初期状態では非表示 */
+      display: none; /* 初期状態では非表示 */
       position: fixed;
       top: 20px;
       left: 50%;
@@ -175,8 +175,13 @@ window.onload = function() {
     setTimeout(() => {
       musicInfo.classList.remove('show'); // 'show'クラスを削除して非表示
       console.log('音楽名を消去');
-    }, 5100); // 5秒後に消えるように設定（ミリ秒単位）
 
+      // 音楽情報要素を完全に削除
+      setTimeout(() => {
+        musicInfo.remove();
+        console.log('音楽情報要素を削除');
+      }, 300); // トランジションが終わるまでの少しの遅延
+    }, 5100); // 5秒後に消えるように設定（ミリ秒単位）
 
     // 音楽を再生する
     audioElement.play().then(() => {
@@ -194,31 +199,3 @@ window.onload = function() {
 
   // アニメーションを切り替え関数
   function switchSlide() {
-    slide1.style.opacity = '1'; // 初期状態でslide1を表示
-
-    slide1.addEventListener('animationend', function() {
-      // slide1のアニメーションが終了したら、次の画像（slide2）へ切り替える
-      slide1.style.opacity = '0'; // 現在の画像をフェードアウトさせる
-      slide2.style.opacity = '1'; // 次の画像をフェードインさせる
-      slide1.style.animation = 'none'; // アニメーションをリセット
-      slide2.style.animation = 'slide2 5s linear forwards'; // slide2のアニメーションを開始
-    });
-
-    slide2.addEventListener('animationend', function() {
-      // slide2のアニメーションが終了したら、次の画像（slide1）へ切り替える
-      slide2.style.opacity = '0'; // 現在の画像をフェードアウトさせる
-      slide1.style.opacity = '1'; // 次の画像をフェードインさせる
-      slide2.style.animation = 'none'; // アニメーションをリセット
-      slide1.style.animation = 'slide1 5s linear forwards'; // slide1のアニメーションを開始
-    });
-
-    // 初期アニメーションを開始
-    slide1.style.animation = 'slide1 5s linear forwards';
-  }
-
-  // アニメーションを切り替え関数を要素作成後に実行
-  switchSlide();
-};
-</script>
-</body>
-</html>
