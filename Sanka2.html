@@ -284,25 +284,7 @@ window.onload = function() {
 switchSlide2();
 };
    function switchSlide2() {
-	var access = $.cookie('access')
-	if(!access){
-		flag = true;
-		$.cookie('access', false);
-	}else{
-		flag = false	
-	}
-	
-	//モーダル表示
-	$(".modal-open").modaal({
-	start_open:flag, // ページロード時に表示するか
-	overlay_close:true,//モーダル背景クリック時に閉じるか
-	before_open:function(){// モーダルが開く前に行う動作
-		$('html').css('overflow-y','hidden');/*縦スクロールバーを出さない*/
-	},
-	after_close:function(){// モーダルが閉じた後に行う動作
-		$('html').css('overflow-y','scroll');/*縦スクロールバーを出す*/
-	}
-	});
+      console.log('akaina081207815468747075084375473154857-37518-75489674-316874-761-968797593541661435515437657-851495894589-05841-74386590438-184-1578-967684568691869587-34');
    }
 </script>
 </body>
