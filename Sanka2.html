@@ -114,31 +114,28 @@ window.onload = function() {
       animation-name: slide2; /* 上で設定しているキーフレーム（keyframes）の名前 */
     }
 
-        .music-info {
-            display: none; /* 初期状態では非表示 */
-            position: fixed;
-            top: -100px; /* 上端から隠しておく */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #444444; /* 背景色を濃くしてコントラストを高める */
-            color: white;
-            padding: 20px 30px; /* パディングを増やして読みやすくする */
-            border-radius: 8px; /* 角を丸くする */
-            font-size: 16px; /* フォントサイズを大きくする */
-            font-weight: bold; /* フォントウェイトを太くする */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
-            text-align: center; /* テキストを中央揃え */
-            z-index: 9999; /* 最前面に表示 */
-            transition: top 0.3s ease; /* トランジション効果を追加 */
-        }
-
-        /* テキストのスタイル */
-        .music-info span {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* テキストの周りを明るくする */
-        }
+    .music-info {
+   //   display: none; /* 初期状態では非表示 */
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7); /* 背景色を濃くしてコントラストを高める */
+      color: white;
+      padding: 20px 30px; /* パディングを増やして読みやすくする */
+      border-radius: 8px; /* 角を丸くする */
+      font-size: 16px; /* フォントサイズを大きくする */
+      font-weight: bold; /* フォントウェイトを太くする */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
+      text-align: center; /* テキストを中央揃え */
+      z-index: 9999; /* 最前面に表示 */
+      transition: top 0.3s ease, opacity 0.3s ease; /* トランジション効果を追加 */
+    }
 
     /* 表示用のクラス */
     .show {
+      display: block;
+      top: 20px;
       opacity: 1;
     }
   `;
