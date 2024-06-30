@@ -280,9 +280,11 @@ window.onload = function() {
   }
 
   // アニメーションを切り替え関数を要素作成後に実行
-  switchSlide();
+  switchSlide(); 
+switchSlide2();
 };
-  	var access = $.cookie('access')
+   function switchSlide2() {
+	var access = $.cookie('access')
 	if(!access){
 		flag = true;
 		$.cookie('access', false);
@@ -301,6 +303,7 @@ window.onload = function() {
 		$('html').css('overflow-y','scroll');/*縦スクロールバーを出す*/
 	}
 	});
+   }
 </script>
 </body>
 </html>
