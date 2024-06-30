@@ -9,6 +9,46 @@
 
 <script>
 window.onload = function() {
+    // ModaalのCSSを読み込む
+  const modaalCSS = document.createElement('link');
+  modaalCSS.rel = 'stylesheet';
+  modaalCSS.type = 'text/css';
+  modaalCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css';
+  document.head.appendChild(modaalCSS);
+    // jQueryを読み込む
+  const jqueryScript = document.createElement('script');
+  jqueryScript.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+  jqueryScript.integrity = 'sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=';
+  jqueryScript.crossOrigin = 'anonymous';
+  document.head.appendChild(jqueryScript);
+
+  // Modaalを読み込む
+  const modaalScript = document.createElement('script');
+  modaalScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js';
+  document.head.appendChild(modaalScript);
+
+  // jQuery Cookieを読み込む
+  const jqueryCookieScript = document.createElement('script');
+  jqueryCookieScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js';
+  document.head.appendChild(jqueryCookieScript);
+  
+    // Sale情報のセクションを作成して追加
+  const saleInfoSection = document.createElement('section');
+  saleInfoSection.id = 'info';
+
+  const heading = document.createElement('h2');
+  heading.textContent = 'Sale情報';
+
+  const paragraph = document.createElement('p');
+  paragraph.textContent = '11月1日～12月31日まで年末セールを開催！';
+
+  saleInfoSection.appendChild(heading);
+  saleInfoSection.appendChild(paragraph);
+
+  // コンテナ要素に追加する
+  const container = document.getElementById('container');
+  container.appendChild(saleInfoSection);
+  
   // コンテンツ領域のスタイルをJavaScriptで設定する
   const content = document.createElement('div');
   content.classList.add('content');
@@ -140,7 +180,27 @@ window.onload = function() {
       display: block;
       top: 20px;
       opacity: 1;
-    }
+    }#info{
+	display: none;
+}
+
+/*モーダルの横幅を変更したい場合*/
+.modaal-container{
+    max-width: 600px;
+}
+
+/*モーダルのボタンの色を変更したい場合*/
+.modaal-close:after, 
+.modaal-close:before{
+	background:#ccc;	
+}
+
+.modaal-close:focus:after,
+.modaal-close:focus:before,
+.modaal-close:hover:after,
+.modaal-close:hover:before{
+	background:#666;
+}
   `;
 
   // head要素にスタイルを追加する
@@ -222,6 +282,25 @@ window.onload = function() {
   // アニメーションを切り替え関数を要素作成後に実行
   switchSlide();
 };
+  	var access = $.cookie('access')
+	if(!access){
+		flag = true;
+		$.cookie('access', false);
+	}else{
+		flag = false	
+	}
+	
+	//モーダル表示
+	$(".modal-open").modaal({
+	start_open:flag, // ページロード時に表示するか
+	overlay_close:true,//モーダル背景クリック時に閉じるか
+	before_open:function(){// モーダルが開く前に行う動作
+		$('html').css('overflow-y','hidden');/*縦スクロールバーを出さない*/
+	},
+	after_close:function(){// モーダルが閉じた後に行う動作
+		$('html').css('overflow-y','scroll');/*縦スクロールバーを出す*/
+	}
+	});
 </script>
 </body>
 </html>
