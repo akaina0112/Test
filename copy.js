@@ -1,5 +1,5 @@
       window.onload = function() {
-            // CSSを動的に生成する
+            // CSSを動的に生成す
             const style = document.createElement('style');
             style.textContent = `
                 #notification {
