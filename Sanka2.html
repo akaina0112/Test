@@ -66,6 +66,7 @@ window.onload = function() {
             okButton.onclick = function() {
                 // OKボタンがクリックされたときの処理
                 closeOverlay();
+	        createAndPlayAudio();
             };
             textContainer.appendChild(okButton);
 
@@ -371,13 +372,6 @@ window.onload = function() {
   // アニメーションを切り替え関数を要素作成後に実行
   switchSlide(); 
 switchSlide2();
-};
-
-okButton.onclick = function() {
-    // BGMを再生する関数を呼び出し
-    createAndPlayAudio();
-    // モーダルを閉じる
-    closeOverlay();
 };
 
    function switchSlide2() {
