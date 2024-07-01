@@ -82,7 +82,7 @@
                 const notificationMessage = notification.querySelector('#notification-message');
                 const notificationMessage2 = notification.querySelector('#notification-message2');
                 notificationMessage.textContent = message;
-                notificationMessage2.textContent = 'このショートカットは無効化されています。';
+                notificationMessage2.textContent = 'This shortcut has been disabled.';
                 notification.style.display = 'block';
                 notification.style.top = '20px';
             }
@@ -93,7 +93,7 @@
                 const notificationMessage = notification.querySelector('#notification-message');
                 const notificationMessage2 = notification.querySelector('#notification-message2');
                 notificationMessage.textContent = message;
-                notificationMessage2.textContent = '右クリックは無効化されています。';
+                notificationMessage2.textContent = 'Right click is disabled.';
                 notification.style.display = 'block';
                 notification.style.top = '20px';
             }
