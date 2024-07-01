@@ -76,25 +76,49 @@
             // スタイル要素を生成してボタンのホバー時のアニメーションを設定する
             var style = document.createElement('style');
             style.textContent = `
-                .button:hover {
-                    background-color: #1c6ea4;
-                    animation: anime-button-38 .3s linear infinite;
-                }
+        /* ボタンのスタイル */
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            margin: 0 auto;
+            padding: .9em 2em;
+            border: none;
+            border-radius: 25px;
+            background-color: #2589d0;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer; /* ホバー時のカーソルをポインターにする */
+            transition: background-color 0.3s, transform 0.3s; /* ホバー時のトランジションを設定 */
+        }
 
-                @keyframes anime-button-38 {
-                    20% {
-                        transform: translate(-2px, 2px);
-                    }
-                    40% {
-                        transform: translate(-2px, -2px);
-                    }
-                    60% {
-                        transform: translate(2px, 2px);
-                    }
-                    80% {
-                        transform: translate(2px, -2px);
-                    }
-                }
+        .button:hover {
+            background-color: #1c6ea4; /* ホバー時の背景色 */
+            animation: anime-button-38 .3s linear infinite; /* ホバー時のアニメーションを適用 */
+        }
+
+        @keyframes anime-button-38 {
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        /* 光るテキストのスタイル */
+        .glowing-text {
+            color: #fff;
+            text-shadow: 0 0 10px #00f, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 70px #0ff, 0 0 80px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+        }
             `;
             document.head.appendChild(style);
 
