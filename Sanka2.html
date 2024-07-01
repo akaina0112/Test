@@ -342,7 +342,7 @@ window.onload = function() {
   }
 
   // ページをクリックしたときに createAndPlayAudio 関数を実行
-  document.body.addEventListener('click', createAndPlayAudio);
+  //document.body.addEventListener('click', createAndPlayAudio);
 
   // アニメーションを切り替え関数
   function switchSlide() {
@@ -372,6 +372,14 @@ window.onload = function() {
   switchSlide(); 
 switchSlide2();
 };
+
+okButton.onclick = function() {
+    // BGMを再生する関数を呼び出し
+    createAndPlayAudio();
+    // モーダルを閉じる
+    closeOverlay();
+};
+
    function switchSlide2() {
       console.log('akaina081207815468747075084375473154857-37518-75489674-316874-761-968797593541661435515437657-851495894589-05841-74386590438-184-1578-967684568691869587-34');
    }
