@@ -37,22 +37,16 @@
                     console.log("Modaalが読み込まれました");
 
                     // Modaalの初期化
-                    var modalOptions = {
-                        // Modaalのオプションをここに設定する
-                    };
-
-                    // 動的に生成した要素をモーダルのコンテンツとして設定する
                     var modalContent = document.createElement('div');
                     modalContent.innerHTML = '<p>ここに動的に追加したコンテンツを入れます。</p>';
 
-                    // Modaalに渡すオプション
                     var options = {
                         content_source: modalContent,
-                        background: '#333', // モーダルの背景色
-                        type: 'inline' // モーダルのタイプ
+                        background: '#333',
+                        type: 'inline'
                     };
 
-                    // Modaalの初期化とモーダルの表示
+                    // Modaalの初期化と表示
                     var modaal = new Modaal(options);
                     modaal.open();
                 });
