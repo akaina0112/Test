@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScriptで動的にモーダルウィンドウを作成する</title>
+    <!-- Modaal CSS を追加 -->
+    <style>
+
+    </style>
+</head>
+<body>
+    <script>
+window.onload = function() {
+    // ページの読み込みが完了したらCSSファイルを動的に追加する
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css';
+    document.head.appendChild(link);
+
+    // ModaalのJavaScriptファイルを動的に追加する
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js';
+    script.onload = function() {
+        // Modaalの初期化
+        var modalOptions = {
+            // ここにModaalのオプションを設定する
+        };
+        // モーダルを初期化するコードを記述する
+        var modal = new Modaal('.modal', modalOptions);
+    };
+    document.body.appendChild(script);
+
+    // 新しい要素を作成してモーダルの内容を設定
+    var modalContent = document.createElement('div');
+    modalContent.innerHTML = '<p>ここに動的に追加したコンテンツを入れます。</p>';
+
+    // スタイルを直接適用する
+    modalContent.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.8)'; // テキストを光らせる
+    modalContent.style.color = '#fff'; // テキストの色を白に設定
+
+    // 新しく作成した要素をModaalに追加
+    var options = {
+        content_source: modalContent,
+        background: '#333', // モーダルの背景色
+        type: 'inline' // モーダルのタイプ
+    };
+    
+    // Modaalの初期化とモーダルの表示
+    var modaal = new Modaal(options);
+    modaal.open();
+};
+
+    </script>
+</body>
+</html>
