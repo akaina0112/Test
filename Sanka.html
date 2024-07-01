@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>通知例</title>
-    <style>
+</head>
+<body>
+    <div id="notification">
+        <span id="notification-message"></span><br>
+        <span id="notification-message2"></span><br>
+        <button id="notification-close">OK</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+              const style = document.createElement('style');
+  style.textContent = `
         body {
             /* 画像ファイルの指定 */
             background-image: url(./background.png);
@@ -76,18 +87,10 @@
             0% { background-position: left top; }
             100% { background-position: right top; }
         }
-    </style>
-</head>
-<body>
-    <div id="notification">
-        <span id="notification-message"></span><br>
-        <span id="notification-message2"></span><br>
-        <button id="notification-close">OK</button>
-    </div>
+  `;
 
-    <script>
-        window.onload = function() {
-            
+  // head要素にスタイルを追加する
+  document.head.appendChild(style);
         }
         // キーボードショートカットの無効化
         document.addEventListener('keydown', function(event) {
