@@ -7,53 +7,86 @@
 </head>
 <body>
     <script>
-    window.onload = function() {
-    // 背景用のオーバーレイ要素を生成
-    var overlay = document.createElement('div');
-    overlay.id = 'overlay';
-    overlay.style.display = 'none'; // 最初は非表示
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // 半透明の黒背景
-    overlay.style.zIndex = '1';
-    document.body.appendChild(overlay);
+        window.onload = function() {
+            // 背景用のオーバーレイ要素を生成
+            var overlay = document.createElement('div');
+            overlay.id = 'overlay';
+            overlay.style.display = 'none'; // 最初は非表示
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // 半透明の黒背景
+            overlay.style.zIndex = '1';
+            document.body.appendChild(overlay);
 
-    // テキストを表示するコンテナ要素を生成
-    var textContainer = document.createElement('div');
-    textContainer.id = 'text-container';
-    textContainer.style.display = 'none'; // 最初は非表示
-    textContainer.style.position = 'fixed';
-    textContainer.style.top = '50%';
-    textContainer.style.left = '50%';
-    textContainer.style.transform = 'translate(-50%, -50%)';
-    textContainer.style.textAlign = 'center';
-    textContainer.style.color = 'white';
-    textContainer.style.zIndex = '2';
+            // テキストを表示するコンテナ要素を生成
+            var textContainer = document.createElement('div');
+            textContainer.id = 'text-container';
+            textContainer.style.display = 'none'; // 最初は非表示
+            textContainer.style.position = 'fixed';
+            textContainer.style.top = '50%';
+            textContainer.style.left = '50%';
+            textContainer.style.transform = 'translate(-50%, -50%)';
+            textContainer.style.textAlign = 'center';
+            textContainer.style.color = 'white';
+            textContainer.style.zIndex = '2';
 
-    // テキストコンテンツを生成
-    var heading = document.createElement('h2');
-    heading.textContent = 'Welcome to My Page';
-    textContainer.appendChild(heading);
+            // テキストコンテンツを生成
+            var heading = document.createElement('h2');
+            heading.textContent = 'Welcome to My Page';
+            heading.classList.add('glowing-text'); // 光るテキストのクラスを追加
+            textContainer.appendChild(heading);
 
-    var paragraph = document.createElement('p');
-    paragraph.textContent = 'This is some introductory text.';
-    textContainer.appendChild(paragraph);
+            var paragraph = document.createElement('p');
+            paragraph.textContent = 'This is some introductory text.';
+            paragraph.classList.add('glowing-text'); // 光るテキストのクラスを追加
+            textContainer.appendChild(paragraph);
 
-    document.body.appendChild(textContainer);
+            // OKボタンを生成してテキストコンテナに追加
+            var okButton = document.createElement('button');
+            okButton.textContent = 'OK';
+            okButton.onclick = function() {
+                // OKボタンがクリックされたときの処理
+                closeOverlay();
+            };
+            okButton.style.backgroundColor = '#007bff';
+            okButton.style.color = 'white';
+            okButton.style.border = 'none';
+            okButton.style.padding = '10px 20px';
+            okButton.style.cursor = 'pointer';
+            okButton.style.marginTop = '20px';
+            textContainer.appendChild(okButton);
 
-    // ページ読み込み後に背景を暗くしてテキストを表示する関数
-    function openModal() {
-        overlay.style.display = 'block';
-        textContainer.style.display = 'block';
-    }
+            document.body.appendChild(textContainer);
 
-    // openModal関数を実行する例として、ページ読み込み時に実行する
-    openModal();
-};
+            // スタイル要素を生成してボタンのスタイルを設定する
+            var style = document.createElement('style');
+            style.textContent = `
+                /* 光るテキストのスタイル */
+                .glowing-text {
+                    color: #fff;
+                    text-shadow: 0 0 10px #00f, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 70px #0ff, 0 0 80px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+                }
+            `;
+            document.head.appendChild(style);
 
+            // ページ読み込み後に背景を暗くしてテキストを表示する関数
+            function openModal() {
+                overlay.style.display = 'block';
+                textContainer.style.display = 'block';
+            }
+
+            // モーダルを閉じる関数
+            function closeOverlay() {
+                overlay.style.display = 'none';
+                textContainer.style.display = 'none';
+            }
+
+            // openModal関数を実行する例として、ページ読み込み時に実行する
+            openModal();
+        };
     </script>
 </body>
 </html>
