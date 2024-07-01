@@ -4,138 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>通知例</title>
-</head>
-<body>
-    <div id="notification">
-        <span id="notification-message"></span><br>
-        <span id="notification-message2"></span><br>
-        <button id="notification-close">OK</button>
-    </div>
-
     <script>
         window.onload = function() {
-              const style = document.createElement('style');
-  style.textContent = `
-        body {
-            /* 画像ファイルの指定 */
-            background-image: url(./background.png);
-            
-            /* 画像を常に天地左右の中央に配置 */
-            background-position: center center;
-            
-            /* 画像をタイル状に繰り返し表示しない */
-            background-repeat: no-repeat;
-            
-            /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
-            background-attachment: fixed;
-            
-            /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
-            background-size: cover;
-            
-            /* 背景画像が読み込まれる前に表示される背景のカラー */
-            background-color: #464646;
-        }
+            // CSSを動的に生成する
+            const style = document.createElement('style');
+            style.textContent = `
+                body {
+                    background-image: url(./background.png);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: cover;
+                    background-color: #464646;
+                }
 
-        /* 通知ボックスのスタイル */
-        #notification {
-            display: none; /* 初期状態では非表示 */
-            position: fixed;
-            top: -100px; /* 上端から隠しておく */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #444444; /* 背景色を濃くしてコントラストを高める */
-            color: white;
-            padding: 20px 30px; /* パディングを増やして読みやすくする */
-            border-radius: 8px; /* 角を丸くする */
-            font-size: 16px; /* フォントサイズを大きくする */
-            font-weight: bold; /* フォントウェイトを太くする */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウを追加して視認性を高める */
-            text-align: center; /* テキストを中央揃え */
-            z-index: 9999; /* 最前面に表示 */
-            transition: top 0.3s ease; /* トランジション効果を追加 */
-        }
+                #notification {
+                    display: none;
+                    position: fixed;
+                    top: -100px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: #444444;
+                    color: white;
+                    padding: 20px 30px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    z-index: 9999;
+                    transition: top 0.3s ease;
+                }
 
-        /* テキストのスタイル */
-        #notification span {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* テキストの周りを明るくする */
-        }
+                #notification span {
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+                }
 
-        /* ボタンのスタイル */
-        #notification button {
-            color: #e6e6fa; /* テキストの色を白に設定 */
-            margin-top: 10px;
-            padding: 10px 20px; /* パディングを増やす */
-            background-color: transparent;
-            background-image: url('./cat.gif'); /* 猫の画像を設定 */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: none;
-            border-radius: 5px; /* 角を丸くする */
-            cursor: pointer;
-            font-size: 14px; /* フォントサイズを大きくする */
-            animation: catWalk 5s linear infinite; /* 猫の歩行アニメーションを設定 */
-        }
+                #notification button {
+                    color: #e6e6fa;
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    background-color: transparent;
+                    background-image: url('./cat.gif');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    animation: catWalk 5s linear infinite;
+                }
 
-        /* ボタンのホバースタイル */
-        #notification button:hover {
-            opacity: 0.8; /* ホバー時に透明度を下げて少し暗くする */
-        }
+                #notification button:hover {
+                    opacity: 0.8;
+                }
 
-        /* 猫の歩行アニメーション */
-        @keyframes catWalk {
-            0% { background-position: left top; }
-            100% { background-position: right top; }
-        }
-  `;
+                @keyframes catWalk {
+                    0% { background-position: left top; }
+                    100% { background-position: right top; }
+                }
+            `;
+            document.head.appendChild(style);
 
-  // head要素にスタイルを追加する
-  document.head.appendChild(style);
-        }
-        // キーボードショートカットの無効化
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'p')) {
+            // HTMLを動的に生成する
+            const notification = document.createElement('div');
+            notification.id = 'notification';
+            notification.innerHTML = `
+                <span id="notification-message"></span><br>
+                <span id="notification-message2"></span><br>
+                <button id="notification-close">OK</button>
+            `;
+            document.body.appendChild(notification);
+
+            // JavaScriptを動的に生成する
+            // キーボードショートカットの無効化
+            document.addEventListener('keydown', function(event) {
+                if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'p')) {
+                    event.preventDefault();
+                    showNotification('このショートカットは無効化されています。');
+                }
+            });
+
+            // 右クリックの無効化
+            document.addEventListener('contextmenu', function(event) {
                 event.preventDefault();
-                showNotification('このショートカットは無効化されています。');
+                showRightClickNotification('右クリックは無効化されています。');
+            });
+
+            // 通知を表示する関数（ショートカット無効化用）
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                const notificationMessage = notification.querySelector('#notification-message');
+                const notificationMessage2 = notification.querySelector('#notification-message2');
+                notificationMessage.textContent = message;
+                notificationMessage2.textContent = 'このショートカットは無効化されています。';
+                notification.style.display = 'block';
+                notification.style.top = '20px';
             }
-        });
 
-        // 右クリックの無効化
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-            showRightClickNotification('右クリックは無効化されています。');
-        });
+            // 通知を表示する関数（右クリック無効化用）
+            function showRightClickNotification(message) {
+                const notification = document.getElementById('notification');
+                const notificationMessage = notification.querySelector('#notification-message');
+                const notificationMessage2 = notification.querySelector('#notification-message2');
+                notificationMessage.textContent = message;
+                notificationMessage2.textContent = '右クリックは無効化されています。';
+                notification.style.display = 'block';
+                notification.style.top = '20px';
+            }
 
-        // 通知を表示する関数（ショートカット無効化用）
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const notificationMessage = document.getElementById('notification-message');
-            const notificationMessage2 = document.getElementById('notification-message2');
-            notificationMessage.textContent = message;
-            notificationMessage2.textContent = "This shortcut has been disabled.";
-            notification.style.display = 'block';
-            notification.style.top = '20px'; // 上からの位置を設定
-        }
-
-        // 通知を表示する関数（右クリック無効化用）
-        function showRightClickNotification(message) {
-            const notification = document.getElementById('notification');
-            const notificationMessage = document.getElementById('notification-message');
-            const notificationMessage2 = document.getElementById('notification-message2');
-            notificationMessage.textContent = message;
-            notificationMessage2.textContent = 'This right-click has been disabled.';
-            notification.style.display = 'block';
-            notification.style.top = '20px'; // 上からの位置を設定
-        }
-
-        // OKボタンをクリックしたときの処理
-        document.getElementById('notification-close').addEventListener('click', function() {
-            const notification = document.getElementById('notification');
-            notification.style.top = '-100px'; // 上に隠す位置に設定
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 510); // トランジション時間と合わせる
-        });
+            // OKボタンをクリックしたときの処理
+            document.getElementById('notification-close').addEventListener('click', function() {
+                const notification = document.getElementById('notification');
+                notification.style.top = '-100px';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 510);
+            });
+        };
     </script>
+</head>
+<body>
 </body>
 </html>
