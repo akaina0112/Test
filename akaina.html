@@ -7,51 +7,53 @@
 </head>
 <body>
     <script>
-        // スクリプトを動的に読み込むための関数
-        function loadScript(url, callback) {
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = url;
-            script.onload = callback;
-            document.head.appendChild(script);
-        }
+    window.onload = function() {
+    // 背景用のオーバーレイ要素を生成
+    var overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    overlay.style.display = 'none'; // 最初は非表示
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // 半透明の黒背景
+    overlay.style.zIndex = '1';
+    document.body.appendChild(overlay);
 
-        // スタイルシートを動的に読み込むための関数
-        function loadStylesheet(url) {
-            var link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = url;
-            document.head.appendChild(link);
-        }
+    // テキストを表示するコンテナ要素を生成
+    var textContainer = document.createElement('div');
+    textContainer.id = 'text-container';
+    textContainer.style.display = 'none'; // 最初は非表示
+    textContainer.style.position = 'fixed';
+    textContainer.style.top = '50%';
+    textContainer.style.left = '50%';
+    textContainer.style.transform = 'translate(-50%, -50%)';
+    textContainer.style.textAlign = 'center';
+    textContainer.style.color = 'white';
+    textContainer.style.zIndex = '2';
 
-        window.onload = function() {
-            // jQueryを動的に読み込む
-            loadScript("https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js", function() {
-                console.log("jQueryが読み込まれました");
+    // テキストコンテンツを生成
+    var heading = document.createElement('h2');
+    heading.textContent = 'Welcome to My Page';
+    textContainer.appendChild(heading);
 
-                // ModaalのCSSを動的に読み込む
-                loadStylesheet("https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css");
+    var paragraph = document.createElement('p');
+    paragraph.textContent = 'This is some introductory text.';
+    textContainer.appendChild(paragraph);
 
-                // ModaalのJavaScriptを動的に読み込む
-                loadScript("https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js", function() {
-                    console.log("Modaalが読み込まれました");
+    document.body.appendChild(textContainer);
 
-                    // Modaalの初期化
-                    var modalContent = document.createElement('div');
-                    modalContent.innerHTML = '<p>ここに動的に追加したコンテンツを入れます。</p>';
+    // ページ読み込み後に背景を暗くしてテキストを表示する関数
+    function openModal() {
+        overlay.style.display = 'block';
+        textContainer.style.display = 'block';
+    }
 
-                    var options = {
-                        content_source: modalContent,
-                        background: '#333',
-                        type: 'inline'
-                    };
+    // openModal関数を実行する例として、ページ読み込み時に実行する
+    openModal();
+};
 
-              //      // Modaalの初期化と表示
-                    var modaal = new Modaal(options);
-                    modaal.open();
-                });
-            });
-        };
     </script>
 </body>
 </html>
