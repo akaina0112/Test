@@ -18,6 +18,19 @@
         audioElement.play();
     }
 });
+  document.addEventListener('DOMContentLoaded', function() {
+    playBackgroundMusic();
+});
+
+function playBackgroundMusic() {
+    var audioContext = new AudioContext();
+    var audioElement = new Audio('path/to/bgm.mp3');
+    var source = audioContext.createMediaElementSource(audioElement);
+    source.connect(audioContext.destination);
+    
+    audioElement.play();
+}
+
 </script>  
 </body>
 </html>
