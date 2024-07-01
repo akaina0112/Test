@@ -11,7 +11,7 @@
     document.addEventListener('visibilitychange', function() {
     if (!document.hidden) { // ページがアクティブになった場合
         var audioContext = new AudioContext();
-        var audioElement = new Audio('path/to/bgm.mp3');
+        var audioElement = new Audio('https://akaina0112.github.io/Test/bgm.mp3');
         var source = audioContext.createMediaElementSource(audioElement);
         source.connect(audioContext.destination);
         
