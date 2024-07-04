@@ -90,11 +90,7 @@
 <div class="text-container" onclick="startTextAnimation()">クリックして始める</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const mainImgDiv = document.getElementById('mainimg');
-  const mainImg2Div = document.getElementById('mainimg2');
-  const textContainer = document.querySelector('.text-container');
-  const texts = [
+    const texts = [
     '互いに惹かれあって',
     '僕達は出会ってしまう',
     '僕はいつか貴方の恋人になりたい',
@@ -127,6 +123,27 @@ document.addEventListener('DOMContentLoaded', function() {
   let index = 0;
   let currentTextElement = null;
 
+document.addEventListener('DOMContentLoaded', function() {
+  const mainImgDiv = document.getElementById('mainimg');
+  const mainImg2Div = document.getElementById('mainimg2');
+  const textContainer = document.querySelector('.text-container');
+  function applyAnimation(element) {
+    element.style.opacity = '0';
+    element.classList.add('fade-in');
+
+    setTimeout(() => {
+      element.style.opacity = '1';
+      element.classList.add('shine');
+    }, 100);
+
+    setTimeout(() => {
+      element.classList.remove('fade-in', 'shine');
+      element.style.opacity = '0';
+    }, 4000); // 4000ミリ秒後にアニメーションを解除
+  }
+});
+  
+  
   window.startTextAnimation = function() {
     mainImgDiv.style.display = 'none';
     mainImg2Div.style.display = 'block';
@@ -144,21 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  function applyAnimation(element) {
-    element.style.opacity = '0';
-    element.classList.add('fade-in');
-
-    setTimeout(() => {
-      element.style.opacity = '1';
-      element.classList.add('shine');
-    }, 100);
-
-    setTimeout(() => {
-      element.classList.remove('fade-in', 'shine');
-      element.style.opacity = '0';
-    }, 4000); // 4000ミリ秒後にアニメーションを解除
-  }
-});
 </script>
 
 </body>
