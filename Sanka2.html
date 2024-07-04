@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Touhou Little Maid</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Touhou Little Maid　addon">
+<meta name="description" content="Touhou Little Maid addon">
 <style>
   body {
     margin: 0;
@@ -42,7 +42,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 2;
-    cursor: pointer; /* クリック可能を示すカーソルを追加 */
+    cursor: pointer; /* クリック可能にするためにカーソルをポインターに設定 */
   }
 
   .text {
@@ -87,63 +87,39 @@
 <body>
 <div id="mainimg"></div>
 <div id="mainimg2"></div>
-<div class="text-container" onclick="startTextAnimation()">Click here to start</div>
+<div class="text-container" onclick="startTextAnimation()">クリックして始める</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const mainImgDiv = document.getElementById('mainimg');
   const mainImg2Div = document.getElementById('mainimg2');
   const textContainer = document.querySelector('.text-container');
-  
   const texts = [
-    '互いに惹かれあって',
-    '僕達は出会ってしまう',
-    '僕はいつか貴方の恋人になりたい',
-    '貴方は何も知らない',
-    '知らなくても大丈夫',
-    'すれ違いの始まりはささくれみたい',
-    '恋に落ちている　恋に落ちている',
-    '恋に落ちている　こっちを見てよ！',
-    '恋に落ちている　恋に落ちている',
-    'チョコより甘い温度で溶ける',
-    '貴方の好きな人',
-    '僕はまだ名前も知らない',
-    '貴方のせいです',
-    '素敵な横顔のせいで',
-    '話しかけることが出来ない でも',
-    '僕はいつか貴方の恋人になりたい',
-    'あのね　今',
-    '恋に落ちている　恋に落ちている',
-    'チョコより甘い温度で溶ける',
-    '恋に落ちている　恋に落ちている',
-    '恋に落ちている　こっちを見てよ！',
-    '恋に落ちている　恋に落ちている',
-    'チョコより甘い温度で溶ける',
-    '恋に落ちている　恋に落ちている',
-    'チョコより甘い温度で溶ける',
-    '互いに惹かれあって',
-    '僕達は出会ってしまう',
-    '僕はいつか貴方の恋人になりたい'
+    'テキスト1: 貴方の恋人になりたい',
+    'テキスト2: 知らなくても大丈夫',
+    'テキスト3: すれ違いの始まりはささくれみたい',
+    'テキスト4: 恋に落ちている',
+    'テキスト5: こっちを見てよ！',
+    'テキスト6: 恋に落ちている',
+    'テキスト7: 恋に落ちている',
+    'テキスト8: チョコより甘い温度で溶ける'
   ];
-  
   let index = 0;
   let currentTextElement = null;
 
   window.startTextAnimation = function() {
     mainImgDiv.style.display = 'none';
     mainImg2Div.style.display = 'block';
-    
     if (index < texts.length) {
       if (currentTextElement) {
-        textContainer.removeChild(currentTextElement); // Remove previous text
+        textContainer.removeChild(currentTextElement); // 前のテキストを削除
       }
-      
       const textElement = document.createElement('div');
       textElement.classList.add('text');
       textElement.textContent = texts[index];
       textContainer.appendChild(textElement);
       applyAnimation(textElement);
-      currentTextElement = textElement; // Update current text element
+      currentTextElement = textElement; // 現在のテキスト要素を更新
       index++;
     }
   };
@@ -160,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       element.classList.remove('fade-in', 'shine');
       element.style.opacity = '0';
-    }, 4000); // Remove animations after 4000 milliseconds
+    }, 4000); // 4000ミリ秒後にアニメーションを解除
   }
 });
 </script>
